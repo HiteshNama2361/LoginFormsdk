@@ -1,0 +1,1829 @@
+{
+  "screens": {
+    "NoScreenFound": {
+      "name": "screen_0",
+      "screen_number": 0,
+      "screen_type": "activity",
+      "details": [""],
+      "id_types": ["id"],
+      "primary_command": "process_check_for_no_screen_found",
+      "restricted_words": ["shut,up"],
+      "commands": {
+        "go,back": "go_back"
+      },
+      "help_commands": "go back"
+    },
+    "form_screen": {
+      "name": "screen_23",
+      "screen_number": 23,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_dashboard_user_details",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    },
+    "account-card": {
+      "name": "screen_2",
+      "screen_number": 2,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_check_payee_name_found_globally",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    },
+    "account-details": {
+      "name": "screen_3",
+      "screen_number": 3,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_speak_payee_item_details",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    },
+    "otp-confirmation": {
+      "name": "screen_4",
+      "screen_number": 4,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_select_otp_confirmation",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    },
+    "search-payees": {
+      "name": "screen_5",
+      "screen_number": 5,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_ask_payee_name_from_list",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    },
+    "summary-container": {
+      "name": "screen_6",
+      "screen_number": 6,
+      "screen_type": "activity",
+      "details": [
+        ""
+      ],
+      "id_types": [
+      "id"
+      ],
+      "primary_command": "process_summary_transaction_successfull",
+      "restricted_words": [
+
+      ],
+      "commands": {
+        "exit": "perform_go_back",
+        "quit": "perform_go_back",
+        "close": "perform_go_back",
+        "clause": "perform_go_back",
+        "clothes": "perform_go_back",
+        "log,out": "perform_go_back",
+        "logout": "perform_go_back"
+      }
+    }
+  },
+  "processes": {
+
+   "process_dashboard_user_details": {
+      "spoken_feedback": "Welcome to Louie Voice! Now, you can fill your login details, with just voice commands!",
+      "action_id": 26,
+      "action_intent": "process_dashboard_user_details",
+      "next": "process_ask_first_name"
+    },
+    "process_ask_first_name": {
+      "spoken_feedback": "Please speak your name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_first_name",
+      "node_to_process": "first-name",
+      "node_value_type": "id",
+      "next":"process_confirm_first_name",
+      "error_next": "shut_down",
+      "help_command": "speak your  name",
+      "help_command_alternate": "Please speak your name"
+    },
+    "process_confirm_first_name": {
+      "spoken_feedback": "Please say confirm or modify name ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_phone",
+        "gun,form-process_ask_phone",
+        "gun,foam-process_ask_phone",
+        "gun,forum-process_ask_phone",
+        "gun,fom-process_ask_phone",
+        "gun,formed-process_ask_phone",
+        "confirm,name-process_ask_phone",
+        "proceed-process_ask_phone",
+        "confirm-process_ask_phone",
+        "yes,confirm-process_ask_phone",
+        "yes,please-process_ask_phone",
+        "good,to,go-process_ask_phone",
+        "go,ahead-process_ask_phone",
+        "ahead-process_ask_phone",
+        "yes,yes-process_ask_phone",
+        "yess-process_ask_phone",
+        "yes-process_ask_phone",
+        "sure-process_ask_phone",
+        "of,course-process_ask_phone",
+        "proceed-process_ask_phone",
+        "modified-process_modify_first_name",
+        "modify,first,name-process_modify_first_name",
+        "modify-process_modify_first_name",
+        "changed-process_modify_first_name",
+        "change-process_modify_first_name",
+        "edit-process_modify_first_name",
+        "add,it-process_modify_first_name",
+        "edit,details-process_modify_first_name"
+      ],
+      "help_command": "Please say confirm or modify your name ?"
+    },
+    "process_modify_first_name": {
+      "spoken_feedback": "speak modified name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_first_name",
+      "node_to_process": "first-name",
+      "node_value_type": "id",
+      "next": "process_confirm_first_name",
+      "error_next": "shut_down",
+      "help_command": "please speak modified name",
+      "help_command_alternate": "Please speak your name"
+    },
+
+    "process_ask_phone": {
+      "spoken_feedback": "Please speak your 10 digit phone number",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_phone",
+      "node_to_process": "phone",
+      "node_value_type": "id",
+      "next":"process_confirm_phone",
+      "error_next": "shut_down",
+      "help_command": "speak your valid contact details",
+      "help_command_alternate": "Please speak your valid phone number"
+    },
+    "process_confirm_phone": {
+      "spoken_feedback": "Please say confirm or modify phone number ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_pin_code",
+        "gun,form-process_ask_pin_code",
+        "gun,foam-process_ask_pin_code",
+        "gun,forum-process_ask_pin_code",
+        "gun,fom-process_ask_pin_code",
+        "gun,formed-process_ask_pin_code",
+        "confirm,phone,number-process_ask_pin_code",
+        "proceed-process_ask_pin_code",
+        "confirm-process_ask_pin_code",
+        "yes,confirm-process_ask_pin_code",
+        "yes,please-process_ask_pin_code",
+        "good,to,go-process_ask_pin_code",
+        "go,ahead-process_ask_pin_code",
+        "ahead-process_ask_pin_code",
+        "yes,yes-process_ask_pin_code",
+        "yess-process_ask_pin_code",
+        "yes-process_ask_pin_code",
+        "sure-process_ask_pin_code",
+        "of,course-process_ask_pin_code",
+        "proceed-process_ask_pin_code",
+        "modified-process_modify_phone",
+        "modify,phone,number-process_modify_phone",
+        "modify-process_modify_phone",
+        "changed-process_modify_phone",
+        "change-process_modify_phone",
+        "edit-process_modify_phone",
+        "add,it-process_modify_phone",
+        "edit,details-process_modify_phone"
+      ],
+      "help_command": "Please say confirm or modify phone number ?"
+    },
+    "process_modify_phone": {
+      "spoken_feedback": "speak modified phone number",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_phone",
+      "node_to_process": "phone",
+      "node_value_type": "id",
+      "next": "process_confirm_phone",
+      "error_next": "shut_down",
+      "help_command": "please speak modified 10 digit valid phone number",
+      "help_command_alternate": "Please speak your valid phone number"
+    },
+
+    "process_ask_pin_code": {
+      "spoken_feedback": "Please speak 6 digit Pin-code",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_pin_code",
+      "node_to_process": "pin",
+      "node_value_type": "id",
+      "next":"process_confirm_pin_code",
+      "error_next": "shut_down",
+      "help_command": "speak your valid pin code",
+      "help_command_alternate": "Please speak your 6 digit valid pin code"
+    },
+    "process_confirm_pin_code": {
+      "spoken_feedback": "Please say confirm or modify pin-code ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_email",
+        "gun,form-process_ask_email",
+        "gun,forum-process_ask_email",
+        "gun,foam-process_ask_email",
+        "gun,fom-process_ask_email",
+        "gun,formed-process_ask_email",
+        "confirm,pin,code-process_ask_email",
+        "proceed-process_ask_email",
+        "confirm-process_ask_email",
+        "yes,confirm-process_ask_email",
+        "yes,please-process_ask_email",
+        "good,to,go-process_ask_email",
+        "go,ahead-process_ask_email",
+        "ahead-process_ask_email",
+        "yes,yes-process_ask_email",
+        "yess-process_ask_email",
+        "yes-process_ask_email",
+        "sure-process_ask_email",
+        "of,course-process_ask_email",
+        "proceed-process_ask_email",
+        "modified-process_modify_pin_code",
+        "modify,pin,code-process_modify_pin_code",
+        "modify-process_modify_pin_code",
+        "changed-process_modify_pin_code",
+        "change-process_modify_pin_code",
+        "edit-process_modify_pin_code",
+        "add,it-process_modify_pin_code",
+        "edit,details-process_modify_pin_code"
+      ],
+      "help_command": "Please say confirm or modify pin code ?"
+    },
+    "process_modify_pin_code": {
+      "spoken_feedback": "speak modified 6 digit valid pin-code",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_pin_code",
+      "node_to_process": "pin",
+      "node_value_type": "id",
+      "next": "process_confirm_pin_code",
+      "error_next": "shut_down",
+      "help_command": "please speak modified 6 digit valid pin-code",
+      "help_command_alternate": "Please speak your valid 6 digit pin code"
+    },
+
+    "process_ask_email": {
+      "spoken_feedback": "Please speak the email",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_email",
+      "node_to_process": "email",
+      "node_value_type": "id",
+      "next":"process_confirm_email",
+      "error_next": "shut_down",
+      "help_command": "speak your valid email",
+      "help_command_alternate": "Please speak your email address"
+    },
+    "process_confirm_email": {
+      "spoken_feedback": "Please say confirm or modify your email ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_date_of_birth",
+        "gun,form-process_ask_date_of_birth",
+        "gun,foam-process_ask_date_of_birth",
+        "gun,forum-process_ask_date_of_birth",
+        "gun,fom-process_ask_date_of_birth",
+        "gun,formed-process_ask_date_of_birth",
+        "confirm,email-process_ask_date_of_birth",
+        "proceed-process_ask_date_of_birth",
+        "confirm-process_ask_date_of_birth",
+        "yes,confirm-process_ask_date_of_birth",
+        "yes,please-process_ask_date_of_birth",
+        "good,to,go-process_ask_date_of_birth",
+        "go,ahead-process_ask_date_of_birth",
+        "ahead-process_ask_date_of_birth",
+        "yes,yes-process_ask_date_of_birth",
+        "yess-process_ask_date_of_birth",
+        "yes-process_ask_date_of_birth",
+        "sure-process_ask_date_of_birth",
+        "of,course-process_ask_date_of_birth",
+        "proceed-process_ask_date_of_birth",
+        "modified-process_modify_email",
+        "modify,email-process_modify_email",
+        "modify-process_modify_email",
+        "changed-process_modify_email",
+        "change-process_modify_email",
+        "edit-process_modify_email",
+        "add,it-process_modify_email",
+        "edit,details-process_modify_email"
+      ],
+      "help_command": "Please say confirm or modify email ?"
+    },
+    "process_modify_email": {
+      "spoken_feedback": "speak modified email",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_email",
+      "node_to_process": "email",
+      "node_value_type": "id",
+      "next": "process_confirm_email",
+      "error_next": "shut_down",
+      "help_command": "please speak modified email",
+      "help_command_alternate": "Please speak your email address"
+    },
+
+    "process_ask_date_of_birth": {
+      "spoken_feedback": "Please speak your date of birth",
+      "is_question": true,
+      "action_id": 7,
+      "action_intent": "process_ask_date_of_birth",
+      "node_to_process": "date-of-birth",
+      "node_value_type": "id",
+      "next":"process_confirm_date_of_birth",
+      "error_next": "shut_down",
+      "help_command": "speak your valid date of birth",
+      "help_command_alternate": "Please speak your date of birth"
+    },
+    "process_confirm_date_of_birth": {
+      "spoken_feedback": "Please say confirm or modify your date of birth ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_gender",
+        "gun,form-process_ask_gender",
+        "gun,foam-process_ask_gender",
+        "gun,forum-process_ask_gender",
+        "gun,fom-process_ask_gender",
+        "gun,formed-process_ask_gender",
+        "confirm,date,of-process_ask_gender",
+        "proceed-process_ask_gender",
+        "confirm-process_ask_gender",
+        "yes,confirm-process_ask_gender",
+        "yes,please-process_ask_gender",
+        "good,to,go-process_ask_gender",
+        "go,ahead-process_ask_gender",
+        "ahead-process_ask_gender",
+        "yes,yes-process_ask_gender",
+        "yess-process_ask_gender",
+        "yes-process_ask_gender",
+        "sure-process_ask_gender",
+        "of,course-process_ask_gender",
+        "proceed-process_ask_gender",
+        "modified-process_modify_date_of_birth",
+        "modify,date,of,birth-process_modify_date_of_birth",
+        "modify-process_modify_date_of_birth",
+        "changed-process_modify_date_of_birth",
+        "change-process_modify_date_of_birth",
+        "edit-process_modify_date_of_birth",
+        "add,it-process_modify_date_of_birth",
+        "edit,details-process_modify_date_of_birth"
+      ],
+      "help_command": "Please say confirm or modify date of birth ?"
+    },
+    "process_modify_date_of_birth": {
+      "spoken_feedback": "speak modified date of birth",
+      "is_question": true,
+      "action_id": 7,
+      "action_intent": "process_modify_date_of_birth",
+      "node_to_process": "date-of-birth",
+      "node_value_type": "id",
+      "next": "process_confirm_date_of_birth",
+      "error_next": "shut_down",
+      "help_command": "please speak modified date of birth"
+    },
+
+    "process_ask_gender": {
+      "spoken_feedback": "Please speak the gender",
+      "is_question": true,
+      "action_intent": "process_ask_gender",
+      "node_to_process": "gender",
+      "answers": [
+        "male-process_set_gender_male",
+        "mail-process_set_gender_male",
+        "m-process_set_gender_male",
+        "maile-process_set_gender_male",
+        "female-process_set_gender_female",
+        "femaile-process_set_gender_female",
+        "femail-process_set_gender_female",
+        "f-process_set_gender_female",
+        "other-process_set_gender_other",
+        "order-process_set_gender_other",
+        "ordered-process_set_gender_other",
+        "oder-process_set_gender_other"
+      ],
+      "error_next": "shut_down",
+      "help_command": "speak your gender",
+      "help_command_alternate": "Please speak your gender"
+    },
+    "process_set_gender_male": {
+       "action_id": 1001,
+       "next": "process_confirm_gender",
+       "node_to_process" :"male",
+       "action_intent": "process_set_gender"
+    },
+    "process_set_gender_female": {
+       "action_id": 1001,
+       "next": "process_confirm_gender",
+       "node_to_process" :"female",
+       "action_intent": "process_set_gender"
+    },
+    "process_set_gender_other": {
+       "action_id": 1001,
+       "next": "process_confirm_gender",
+       "node_to_process" :"other",
+       "action_intent": "process_set_gender"
+    },
+    "process_confirm_gender": {
+      "spoken_feedback": "Please say confirm or modify gender ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_city",
+        "gun,form-process_ask_city",
+        "gun,foam-process_ask_city",
+        "gun,forum-process_ask_city",
+        "gun,fom-process_ask_city",
+        "gun,formed-process_ask_city",
+        "confirm,gender-process_ask_city",
+        "proceed-process_ask_city",
+        "confirm-process_ask_city",
+        "yes,confirm-process_ask_city",
+        "yes,please-process_ask_city",
+        "good,to,go-process_ask_city",
+        "go,ahead-process_ask_city",
+        "ahead-process_ask_city",
+        "yes,yes-process_ask_city",
+        "yess-process_ask_city",
+        "yes-process_ask_city",
+        "sure-process_ask_city",
+        "of,course-process_ask_city",
+        "proceed-process_ask_city",
+        "modified-process_modify_gender",
+        "modify,gender-process_modify_gender",
+        "modify-process_modify_gender",
+        "changed-process_modify_gender",
+        "change-process_modify_gender",
+        "edit-process_modify_gender",
+        "add,it-process_modify_gender",
+        "edit,details-process_modify_gender"
+      ],
+      "help_command": "Please say confirm or modify gender ?"
+    },
+    "process_modify_gender": {
+      "spoken_feedback": "speak modified gender",
+      "is_question": true,
+      "action_intent": "process_modify_gender",
+      "answers": [
+        "male-process_set_gender_male",
+        "mail-process_set_gender_male",
+        "m-process_set_gender_male",
+        "maile-process_set_gender_male",
+        "female-process_set_gender_female",
+        "femaile-process_set_gender_female",
+        "femail-process_set_gender_female",
+        "f-process_set_gender_female",
+        "other-process_set_gender_other",
+        "order-process_set_gender_other",
+        "ordered-process_set_gender_other",
+        "oder-process_set_gender_other"
+      ],
+      "next": "process_confirm_gender",
+      "error_next": "shut_down",
+      "help_command": "please speak modified gender"
+    },
+
+    "process_ask_city": {
+      "spoken_feedback": "Please speak your city name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_city",
+      "node_to_process": "city",
+      "node_value_type": "id",
+      "next":"process_confirm_city",
+      "error_next": "shut_down",
+      "help_command": "speak your  valid city name from the list of city",
+      "help_command_alternate": "Please speak your city name"
+    },
+    "process_confirm_city": {
+      "spoken_feedback": "Please say confirm or modify city name ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_education",
+        "gun,form-process_ask_education",
+        "gun,foam-process_ask_education",
+        "gun,forum-process_ask_education",
+        "gun,fom-process_ask_education",
+        "gun,formed-process_ask_education",
+        "confirm,city,name-process_ask_education",
+        "proceed-process_ask_education",
+        "confirm-process_ask_education",
+        "yes,confirm-process_ask_education",
+        "yes,please-process_ask_education",
+        "good,to,go-process_ask_education",
+        "go,ahead-process_ask_education",
+        "ahead-process_ask_education",
+        "yes,yes-process_ask_education",
+        "yess-process_ask_education",
+        "yes-process_ask_education",
+        "sure-process_ask_education",
+        "of,course-process_ask_education",
+        "proceed-process_ask_education",
+        "modified-process_modify_city",
+        "modify,city,name-process_modify_city",
+        "modify-process_modify_city",
+        "changed-process_modify_city",
+        "change-process_modify_city",
+        "edit-process_modify_city",
+        "add,it-process_modify_city",
+        "edit,details-process_modify_city"
+      ],
+      "help_command": "Please say confirm or modify city name ?"
+    },
+    "process_modify_city": {
+      "spoken_feedback": "speak modified city name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_city",
+      "node_to_process": "city",
+      "node_value_type": "id",
+      "next": "process_confirm_city",
+      "error_next": "shut_down",
+      "help_command": "please speak modified city name"
+    },
+
+    "process_ask_education":{
+      "spoken_feedback": "Please speak your education fields",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_education",
+      "node_to_process": "education",
+      "node_value_type": "id",
+      "next":"process_confirm_education",
+      "error_next": "shut_down",
+      "help_command": "speak your education fields name",
+      "help_command_alternate": "Please speak your valid education from below options"
+    },
+    "process_confirm_education": {
+      "spoken_feedback": "Please say confirm or modify education ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_speak_user_details",
+        "gun,form-process_speak_user_details",
+        "gun,foam-process_speak_user_details",
+        "gun,forum-process_speak_user_details",
+        "gun,fom-process_speak_user_details",
+        "gun,formed-process_speak_user_details",
+        "confirm,education-process_speak_user_details",
+        "proceed-process_speak_user_details",
+        "confirm-process_speak_user_details",
+        "yes,confirm-process_speak_user_details",
+        "yes,please-process_speak_user_details",
+        "good,to,go-process_speak_user_details",
+        "go,ahead-process_speak_user_details",
+        "ahead-process_speak_user_details",
+        "yes,yes-process_speak_user_details",
+        "yess-process_speak_user_details",
+        "yes-process_speak_user_details",
+        "sure-process_speak_user_details",
+        "of,course-process_speak_user_details",
+        "proceed-process_speak_user_details",
+        "modified-process_modify_education",
+        "modify,last,name-process_modify_education",
+        "modify-process_modify_education",
+        "changed-process_modify_education",
+        "change-process_modify_education",
+        "edit-process_modify_education",
+        "add,it-process_modify_education",
+        "edit,details-process_modify_education"
+      ],
+      "help_command": "Please say confirm or modify education?"
+    },
+    "process_modify_education": {
+      "spoken_feedback": "please speak education fields again which would you like to add",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_education",
+      "node_to_process": "education",
+      "node_value_type": "id",
+      "next": "process_confirm_education",
+      "error_next": "shut_down",
+      "help_command": "please repeat modified education fields"
+    },
+
+
+    "process_ask_last_name": {
+      "spoken_feedback": "Please speak the last name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_last_name",
+      "node_to_process": "last-name",
+      "node_value_type": "id",
+      "next":"process_confirm_last_name",
+      "error_next": "shut_down",
+      "help_command": "speak your last name",
+      "help_command_alternate": "Please speak your last name"
+    },
+    "process_confirm_last_name": {
+      "spoken_feedback": "Please say confirm or modify last name ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_phone",
+        "gun,form-process_ask_phone",
+        "gun,foam-process_ask_phone",
+        "gun,forum-process_ask_phone",
+        "gun,fom-process_ask_phone",
+        "gun,formed-process_ask_phone",
+        "confirm,last,name-process_ask_phone",
+        "proceed-process_ask_phone",
+        "confirm-process_ask_phone",
+        "yes,confirm-process_ask_phone",
+        "yes,please-process_ask_phone",
+        "good,to,go-process_ask_phone",
+        "go,ahead-process_ask_phone",
+        "ahead-process_ask_phone",
+        "yes,yes-process_ask_phone",
+        "yess-process_ask_phone",
+        "yes-process_ask_phone",
+        "sure-process_ask_phone",
+        "of,course-process_ask_phone",
+        "proceed-process_ask_phone",
+        "modified-process_modify_last_name",
+        "modify,last,name-process_modify_last_name",
+        "modify-process_modify_last_name",
+        "changed-process_modify_last_name",
+        "change-process_modify_last_name",
+        "edit-process_modify_last_name",
+        "add,it-process_modify_last_name",
+        "edit,details-process_modify_last_name"
+      ],
+      "help_command": "Please say confirm or modify last name ?"
+    },
+    "process_modify_last_name": {
+      "spoken_feedback": "speak modified last name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_last_name",
+      "node_to_process": "last-name",
+      "node_value_type": "id",
+      "next": "process_confirm_last_name",
+      "error_next": "shut_down",
+      "help_command": "please speak modified last name"
+    },
+
+    "process_ask_marital": {
+      "spoken_feedback": "Please speak the marital status",
+      "is_question": true,
+      "action_intent": "process_ask_marital",
+      "node_to_process": "marital",
+      "answers": [
+        "single-process_set_marital_single",
+        "singal-process_set_marital_single",
+        "s-process_set_marital_single",
+        "singhal-process_set_marital_single",
+        "divorced-process_set_marital_divorced",
+        "divorce-process_set_marital_divorced",
+        "divorsed-process_set_marital_divorced",
+        "dievorced-process_set_marital_divorced",
+        "married-process_set_marital_married",
+        "marry-process_set_marital_married",
+        "marie-process_set_marital_married",
+        "maried-process_set_marital_married",
+        "mattered-process_set_marital_married"
+      ],
+      "error_next": "shut_down",
+      "help_command": "speak your marital status",
+      "help_command_alternate": "Please speak your marital status"
+    },
+    "process_set_marital_single": {
+       "action_id": 1001,
+       "next": "process_confirm_marital",
+       "node_to_process" :"single",
+       "action_intent": "process_set_marital"
+    },
+    "process_set_marital_married": {
+       "action_id": 1001,
+       "next": "process_confirm_marital",
+       "node_to_process" :"married",
+       "action_intent": "process_set_marital"
+    },
+    "process_set_marital_divorced": {
+       "action_id": 1001,
+       "next": "process_confirm_marital",
+       "node_to_process" :"divorced",
+       "action_intent": "process_set_marital"
+    },
+    "process_confirm_marital": {
+      "spoken_feedback": "Please say confirm or modify marital-status ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_city",
+        "gun,form-process_ask_city",
+        "gun,foam-process_ask_city",
+        "gun,forum-process_ask_city",
+        "gun,fom-process_ask_city",
+        "gun,formed-process_ask_city",
+        "confirm,marital,status-process_ask_city",
+        "proceed-process_ask_city",
+        "confirm-process_ask_city",
+        "yes,confirm-process_ask_city",
+        "yes,please-process_ask_city",
+        "good,to,go-process_ask_city",
+        "go,ahead-process_ask_city",
+        "ahead-process_ask_city",
+        "yes,yes-process_ask_city",
+        "yess-process_ask_city",
+        "yes-process_ask_city",
+        "sure-process_ask_city",
+        "of,course-process_ask_city",
+        "proceed-process_ask_city",
+        "modified-process_modify_marital",
+        "modify,marital,status-process_modify_marital",
+        "modify-process_modify_marital",
+        "changed-process_modify_marital",
+        "change-process_modify_marital",
+        "edit-process_modify_marital",
+        "add,it-process_modify_marital",
+        "edit,details-process_modify_marital"
+      ],
+      "help_command": "Please say confirm or modify marital status ?"
+    },
+    "process_modify_marital": {
+      "spoken_feedback": "speak modified marital status",
+      "is_question": true,
+      "action_intent": "process_modify_marital",
+      "answers": [
+        "single-process_set_marital_single",
+        "singal-process_set_marital_single",
+        "s-process_set_marital_single",
+        "singhal-process_set_marital_single",
+        "divorced-process_set_marital_divorced",
+        "divorce-process_set_marital_divorced",
+        "divorsed-process_set_marital_divorced",
+        "dievorced-process_set_marital_divorced",
+        "married-process_set_marital_married",
+        "marry-process_set_marital_married",
+        "marie-process_set_marital_married",
+        "maried-process_set_marital_married",
+        "mattered-process_set_marital_married"
+      ],
+      "next": "process_confirm_marital",
+      "error_next": "shut_down",
+      "help_command": "please speak modified marital status"
+    },
+
+    "process_ask_state": {
+      "spoken_feedback": "Please speak your state name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_state",
+      "node_to_process": "state",
+      "node_value_type": "id",
+      "next":"process_confirm_state",
+      "error_next": "shut_down",
+      "help_command": "speak your  valid state name from the list of state",
+      "help_command_alternate": "Please speak your state name"
+    },
+    "process_confirm_state": {
+      "spoken_feedback": "Please say confirm or modify state name ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_ask_country",
+        "gun,form-process_ask_country",
+        "gun,foam-process_ask_contry",
+        "gun,forum-process_ask_country",
+        "gun,fom-process_ask_country",
+        "gun,formed-process_ask_country",
+        "confirm,state,name-process_ask_country",
+        "proceed-process_ask_country",
+        "confirm-process_ask_country",
+        "yes,confirm-process_ask_country",
+        "yes,please-process_ask_country",
+        "good,to,go-process_ask_country",
+        "go,ahead-process_ask_country",
+        "ahead-process_ask_country",
+        "yes,yes-process_ask_country",
+        "yess-process_ask_country",
+        "yes-process_ask_country",
+        "sure-process_ask_country",
+        "of,course-process_ask_country",
+        "proceed-process_ask_country",
+        "modified-process_modify_state",
+        "modify,state,name-process_modify_state",
+        "modify-process_modify_state",
+        "changed-process_modify_state",
+        "change-process_modify_state",
+        "edit-process_modify_state",
+        "add,it-process_modify_state",
+        "edit,details-process_modify_state"
+      ],
+      "help_command": "Please say confirm or modify state name ?"
+    },
+    "process_modify_state": {
+      "spoken_feedback": "speak modified state name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_state",
+      "node_to_process": "state",
+      "node_value_type": "id",
+      "next": "process_confirm_state",
+      "error_next": "shut_down",
+      "help_command": "please speak modified state name"
+    },
+
+    "process_ask_country": {
+      "spoken_feedback": "Please speak your country name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_country",
+      "node_to_process": "country",
+      "node_value_type": "id",
+      "next":"process_confirm_country",
+      "error_next": "shut_down",
+      "help_command": "speak your  valid country name from the list of countries",
+      "help_command_alternate": "Please speak your country name"
+    },
+    "process_confirm_country": {
+      "spoken_feedback": "Please say confirm or modify country name ?",
+      "is_question": true,
+      "answers": [
+        "submit-process_submit_user_details",
+        "summit-process_submit_user_details",
+        "confirmed-process_speak_user_details",
+        "gun,form-process_speak_user_details",
+        "gun,foam-process_speak_user_details",
+        "gun,forum-process_speak_user_details",
+        "gun,fom-process_speak_user_details",
+        "gun,formed-process_speak_user_details",
+        "confirm,country,name-process_speak_user_details",
+        "proceed-process_speak_user_details",
+        "confirm-process_speak_user_details",
+        "yes,confirm-process_speak_user_details",
+        "yes,please-process_speak_user_details",
+        "good,to,go-process_speak_user_details",
+        "go,ahead-process_speak_user_details",
+        "ahead-process_speak_user_details",
+        "yes,yes-process_speak_user_details",
+        "yess-process_speak_user_details",
+        "yes-process_speak_user_details",
+        "sure-process_speak_user_details",
+        "of,course-process_speak_user_details",
+        "proceed-process_speak_user_details",
+        "modified-process_modify_country",
+        "modify,country,name-process_modify_country",
+        "modify-process_modify_country",
+        "changed-process_modify_country",
+        "change-process_modify_country",
+        "edit-process_modify_country",
+        "add,it-process_modify_country",
+        "edit,details-process_modify_country"
+      ],
+      "help_command": "Please say confirm or modify country name ?"
+    },
+    "process_modify_country": {
+      "spoken_feedback": "speak modified country name",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_modify_country",
+      "node_to_process": "country",
+      "node_value_type": "id",
+      "next": "process_confirm_country",
+      "error_next": "shut_down",
+      "help_command": "please speak modified country name"
+    },
+
+    "process_ask_for_submit_or_modify_user_details": {
+      "spoken_feedback": "What would you like to modify first name last name? or submit yours details",
+      "is_question": true,
+        "answers": [
+          "submit-process_submit_user_details",
+          "summit-process_submit_user_details",
+          "modify,date,of,birth-process_modify_date_of_birth",
+          "modify,city-process_modify_city",
+          "modify,gender-process_modify_gender",
+          "modify,last,name-process_modify_last_name",
+          "modify,first,name-process_modify_first_name",
+          "modify,marital,status-process_modify_marital",
+          "modify,state-process_modify_state",
+          "modify,country-process_modify_country",
+          "modify,pin,code-process_modify_pin_code",
+          "modify,phone-process_modify_phone",
+          "modify,email-process_modify_email",
+          "modify,education-process_modify_education"
+        ],
+      "action_intent": "process_ask_for_submit_or_modify_user_details",
+      "help_command": "would you like to modify any detail or say submit to submit the details"
+    },
+    "process_speak_user_details": {
+      "action_id": 104,
+      "action_intent": "process_speak_user_details",
+      "is_custom_action": true,
+      "next": "process_ask_for_submit_or_modify_user_details",
+      "nodes_to_read": [
+        "first-name",
+        "date-of-birth",
+        "phone"
+      ]
+    },
+    "process_submit_user_details":{
+        "spoken_feedback": "your's details submitted successfully!",
+        "action_intent": "process_submit_user_details",
+        "action_id": 23
+    },
+
+
+
+
+
+    "process_check_for_no_screen_found": {
+        "action_id": 21,
+        "action_description": "check for no screen found",
+        "next": "process_no_screen_found"
+    },
+    "process_no_screen_found": {
+        "action_id": 20,
+        "action_description": "no screen found"
+    },
+    "process_delete_yes_or_no": {
+      "spoken_feedback": "would u like to delete fund, yes or no",
+      "is_question": true,
+      "answers": [
+        "yes-process_click_delete",
+        "ya-process_click_delete",
+        "s-process_click_delete",
+        "no-process_give_next_feedback",
+        "not-process_give_next_feedback",
+        "nothing-process_give_next_feedback"
+      ]
+    },
+    "go_to_switch_bank_transfer":{
+      "action_id": 1003,
+      "action_intent": "go_to_switch_bank_transfer",
+      "node_to_process": "next-button",
+      "node_value_type": "id",
+      "spoken_feedback": "Okay",
+      "error_next": "shut_down"
+    },
+    "process_check_payee_name_found_globally": {
+      "is_custom_action": true,
+      "action_id": 202,
+      "next": "process_ask_payee_name",
+      "error_next": "process_view_balance_or_bank_transfer"
+    },
+    "process_fetch_payee_list": {
+      "action_id": 101,
+      "node_to_process": "payee_list",
+      "second_node_to_process": "payee-item",
+      "is_custom_action": true,
+      "next": "process_read_payee_item_next"
+    },
+    "process_read_payee_item_next": {
+      "action_intent": "process_read_payee_item_next",
+      "action_id": 102,
+      "is_custom_action": true,
+      "read_more_max_count": 5,
+      "direct_search_command": "process_check_for_number_select_command_for_payee",
+      "start_command": "next",
+      "is_question": true,
+      "answers": [
+        "select,this,one-process_read_payee_item_select",
+        "choose,this,one-process_read_payee_item_select",
+        "read,more,options-process_read_payee_item_next",
+        "more,results-process_read_payee_item_next",
+        "read,more-process_read_payee_item_next",
+        "next-process_read_payee_item_next",
+        "read-process_read_payee_item_next"
+      ],
+      "help_command": "Please select or read more",
+      "help_command_alternate": "Please select or read more"
+    },
+    "process_read_payee_item_select": {
+      "start_command": "select",
+      "action_id": 102,
+      "is_custom_action": true,
+      "node_to_process": "payee_list",
+      "second_node_to_process": "payee-item",
+      "node_value_type":"id",
+      "process_for_next_screen": "process_speak_payee_item_details",
+      "error_next": "shut_down"
+    },
+    "process_speak_payee_item_details": {
+      "action_id": 104,
+      "is_custom_action": true,
+      "next": "process_ask_amount",
+      "nodes_to_read": [
+        "payee-name",
+        "account-no"
+      ]
+    },
+    "process_read_payee_item_previous": {
+      "action_intent": "process_read_payee_item_previous",
+      "action_id": 102,
+      "read_more_max_count": 5,
+      "start_command": "previous",
+      "direct_search_command": "process_check_for_number_select_command_for_payee",
+      "is_question": true,
+      "answers": [
+        "select,this,one-process_read_payee_item_select",
+        "choose,this,one-process_read_payee_item_select",
+        "read,more,options-process_read_payee_item_next",
+        "more,results-process_read_payee_item_next",
+        "read,more-process_read_payee_item_next",
+        "next-process_read_payee_item_next",
+        "read-process_read_payee_item_next"
+      ],
+      "help_command": "Please select or read more",
+      "help_command_alternate": "Please select or read more"
+    },
+    "process_click_next_button_home_bank": {
+      "action_id": 1003,
+      "action_intent": "process_click_next_button_home_bank",
+      "node_to_process": "next-button",
+      "node_value_type": "id",
+      "spoken_feedback": "Okay",
+      "process_for_next_screen": "process_click_balance_button_main_screen",
+      "error_next": "shut_down"
+    },
+    "process_view_balance_or_bank_transfer": {
+      "spoken_feedback": "You can do bank transfer or check account balance?",
+      "is_question": true,
+      "answers": [
+        "transfer,some,money-process_ask_payee_name",
+        "transfer,some,amount-process_ask_payee_name",
+        "transfer,some,funds-process_ask_payee_name",
+        "transfer,some,fund-process_ask_payee_name",
+        "send,some,money-process_ask_payee_name",
+        "send,some,amount-process_ask_payee_name",
+        "pay,some,money-process_ask_payee_name",
+        "pay,some,amount-process_ask_payee_name",
+        "bank,transfer-process_ask_payee_name",
+        "fund,transfer-process_ask_payee_name",
+        "account,transfer-process_ask_payee_name",
+        "transfer,money-process_ask_payee_name",
+        "pay,money-process_ask_payee_name",
+        "pay,amount-process_ask_payee_name",
+        "send,money-process_ask_payee_name",
+        "send,amount-process_ask_payee_name",
+        "switch-process_ask_payee_name",
+        "switching-process_ask_payee_name",
+        "exchange-process_ask_payee_name",
+        "transfer-process_ask_payee_name",
+        "transform-process_ask_payee_name",
+        "move-process_ask_payee_name",
+        "reallocate-process_ask_payee_name",
+        "reallocating-process_ask_payee_name",
+        "transition-process_ask_payee_name",
+        "bank,transfer-process_ask_payee_name",
+        "bank-process_ask_payee_name",
+        "banktransfer-process_ask_payee_name",
+        "transfer,bank-process_ask_payee_name",
+        "convert-process_ask_payee_name",
+        "change-process_ask_payee_name",
+        "invest-process_ask_payee_name",
+        "start-process_ask_payee_name",
+        "new-process_ask_payee_name",
+        "investment-process_ask_payee_name",
+        "check,account,balance-process_click_balance_button_main_screen",
+        "view,balance-process_click_balance_button_main_screen",
+        "check,balance-process_click_balance_button_main_screen",
+        "account-process_click_balance_button_main_screen",
+        "balance-process_click_balance_button_main_screen",
+        "money,in,my,account-process_click_balance_button_main_screen",
+        "show,my,balance-process_click_balance_button_main_screen",
+        "view,my,balance-process_click_balance_button_main_screen",
+        "account,balance-process_click_balance_button_main_screen",
+        "bank,balance-process_click_balance_button_main_screen",
+        "my,balance-process_click_balance_button_main_screen",
+        "check,my,account-process_click_balance_button_main_screen",
+        "my,bank,limit-process_click_balance_button_main_screen",
+        "bank,limit-process_click_balance_button_main_screen",
+        "investment-process_click_balance_button_main_screen",
+        "bank-process_click_balance_button_main_screen",
+        "cancel,this,transaction-process_cancel_transaction",
+        "cancel,it-process_cancel_transaction",
+        "cancel,this-process_cancel_transaction",
+        "cancel,transaction-process_cancel_transaction",
+        "cancel-process_cancel_transaction",
+        "not-process_cancel_transaction",   
+        "no-process_cancel_transaction",
+        "not-process_cancel_transaction"   
+      ],
+      "help_command": "Simply say: Transfer money. Or, Check account balance.",
+      "help_command_alternate": "You can say: Transfer money. Or, Check account balance."
+    },
+    "process_check_for_number_select_command_for_payee": {
+      "is_custom_action": true,
+      "action_id": 103,
+      "next": "process_read_payee_item_select",
+      "error_next": "process_read_payee_item_next"
+    },
+    "process_click_search_button": {
+      "action_id": 1003,
+      "action_intent": "process_click_search_button",
+      "node_to_process": "search-payees",
+      "node_value_type": "id",
+      "next": "process_ask_payee_name",
+      "error_next": "shut_down"
+    },
+    "process_ask_payee_name": {
+      "spoken_feedback": "Please speak the name of the payee",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_ask_payee_name",
+      "node_to_process": "search-payees",
+      "node_value_type": "id",
+      "next":"process_fetch_payee_list",
+      "error_next": "shut_down",
+      "help_command": "Please speak the name of the payee",
+      "help_command_alternate": "Please speak the name of the payee"
+    },
+    "process_click_balance_button_main_screen": {
+      "action_id": 1003,
+      "action_intent": "process_click_balance_button_main_screen",
+      "node_to_process": "balance-button",
+      "node_value_type": "id",
+      "delay_to_next": 2000,
+      "spoken_feedback": "Checking",
+      "next": "process_read_balance",
+      "error_next": "shut_down"
+    },
+    "process_read_balance": {
+      "action_id": 201,
+      "is_custom_action": true,
+      "node_to_process": "balance",
+      "node_value_type": "id",
+      "next": "process_ask_bank_transfer_yes_or_no",
+      "error_next": "process_ask_bank_transfer_yes_or_no"
+    },
+    "process_ask_bank_transfer_yes_or_no": {
+      "spoken_feedback": "Would you like to do a bank transfer? Yes, or, No?",
+      "is_question": true,
+      "answers": [
+        "yes-process_ask_payee_name",
+        "ya-process_ask_payee_name",
+        "ss-process_ask_payee_name",
+        "ok-process_ask_payee_name",
+        "s-process_ask_payee_name",
+        "no-process_cancel_transaction",
+        "not-process_cancel_transaction"        
+      ],
+      "help_command": "Would you like to do a bank transfer? Yes, or, No?",
+      "help_command_alternate": "Would you like to do a bank transfer? Yes, or, No?"
+    },
+    "process_cancel_transaction": {
+      "spoken_feedback": "No worries! Transaction canceled! ",
+      "action_id": 23
+    },
+    "process_check_transaction_list": {
+      "is_custom_action": true,
+      "action_id": 205,
+      "next": "process_ask_amount",
+      "error_next": "process_speak_amount"
+    },
+    "process_ask_amount": {
+      "spoken_feedback": "How much money would you like to send?",
+      "is_question": true,
+      "action_id": 4,
+      "node_to_process": "amount",
+      "node_value_type": "id",
+      "next":"process_read_transfer_details",
+      "help_command": "Please speak the amount",
+      "help_command_alternate": "Please speak the amount you would like to send"
+    },
+    "process_read_transfer_details": {
+      "action_id": 1005,
+      "is_custom_action": true,
+      "node_to_process": "amount",
+      "node_value_type": "id",
+      "nodes_to_read": [
+        "amount",
+        "payee-name",
+        "transfer-imps",
+        "transfer-neft",
+        "transfer-rtgs"
+      ],
+      "next": "process_confirm_transfer_details",
+      "error_next": "process_ask_bank_transfer_yes_or_no"
+    },
+    "process_confirm_transfer_details": {
+      "spoken_feedback": "Please say confirm or modify details ?",
+      "is_question": true,
+      "answers": [
+        "confirmed-process_click_on_transfer_now_button",
+        "proceed-process_click_on_transfer_now_button",
+        "send-process_click_on_transfer_now_button",
+        "transfer-process_click_on_transfer_now_button",
+        "yes,confirm-process_click_on_transfer_now_button",
+        "make,payment-process_click_on_transfer_now_button",
+        "yes,please-process_click_on_transfer_now_button",
+        "good,to,go-process_click_on_transfer_now_button",
+        "go,ahead-process_click_on_transfer_now_button",
+        "ahead-process_click_on_transfer_now_button",
+        "yes,yes-process_click_on_transfer_now_button",
+        "complete,the,transaction-process_click_on_transfer_now_button",
+        "payment-process_click_on_transfer_now_button",
+        "confirm-process_click_on_transfer_now_button",
+        "yess-process_click_on_transfer_now_button",
+        "yes-process_click_on_transfer_now_button",
+        "sure-process_click_on_transfer_now_button",
+        "of,course-process_click_on_transfer_now_button",
+        "proceed-process_click_on_transfer_now_button",
+        "transfer,now-process_click_on_transfer_now_button",
+        "transfer-process_click_on_transfer_now_button",
+        "modified-process_check_for_modification_transfer",
+        "modify-process_check_for_modification_transfer",
+        "changed-process_check_for_modification_transfer",
+        "change-process_check_for_modification_transfer",
+        "edit-process_check_for_modification_transfer",
+        "add,it-process_check_for_modification_transfer",
+        "edit,details-process_check_for_modification_transfer",
+        "amount-process_ask_amount",
+        "money-process_ask_amount",
+        "am-process_ask_amount",
+        "amnt-process_ask_amount",
+        "change,amount-process_ask_amount",
+        "change,money-process_ask_amount",
+        "edit,amount-process_ask_amount",
+        "modify,amount-process_ask_amount",
+        "change,amount-process_ask_amount",
+        "transfer,amount-process_ask_amount",
+        "payee,name-process_click_payee_list",
+        "pay-process_click_payee_list",
+        "name-process_click_payee_list",
+        "pae-process_click_payee_list",
+        "pay,name-process_click_payee_list",
+        "hey, name-process_click_payee_list",
+        "make,payment-process_click_payee_list"
+      ],
+      "help_command": "Please say confirm or modify details ?"
+    },
+    "process_click_on_transfer_now_button": {
+        "action_id": 1003,
+        "action_intent": "process_click_on_transfer_now_button",
+        "node_to_process": "transfer-now-btn",
+        "node_value_type": "id",
+        "spoken_feedback": "Okay",
+        "error_next": "shut_down"
+    },
+    "process_check_for_modification_transfer": {
+       "spoken_feedback": "What would you like to modify? Payee name, Amount, or, Transfer Type?",
+       "is_question": true,
+       "answers": [
+        "amount-process_ask_amount",
+        "money-process_ask_amount",
+        "am-process_ask_amount",
+        "amnt-process_ask_amount",
+        "change,amount-process_ask_amount",
+        "change,money-process_ask_amount",
+        "edit,amount-process_ask_amount",
+        "modify,amount-process_ask_amount",
+        "change,amount-process_ask_amount",
+        "transfer,amount-process_ask_amount",
+        "payee,name-process_click_payee_list",
+        "pay-process_click_payee_list",
+        "name-process_click_payee_list",
+        "pae-process_click_payee_list",
+        "pay,name-process_click_payee_list",
+        "hey, name-process_click_payee_list",
+        "make,payment-process_click_payee_list"
+      ],
+      "help_command": "Modify: Payee name, Amount, or, Transfer Type?",
+      "help_command_alternate": "You can modify: Payee name, Amount, or, Transfer Type."
+    },
+    "process_click_payee_list": {
+      "action_id": 1003,
+      "action_intent": "process_click_payee_list",
+      "node_to_process": "change-payee-btn",
+      "node_value_type": "id",
+      "delay_to_next": 2000,
+      "next": "process_ask_payee_name",
+      "error_next": "shut_down"
+
+    },
+    "process_select_otp_confirmation": {
+      "spoken_feedback": "Enter the otp manually",
+      "is_custom_action": true
+    },
+    "process_summary_transaction_successfull": {
+      "spoken_feedback": "Transaction Successfully completed"
+    },
+    "process_select_fd_radiobutton": {
+      "action_id": 1001,
+      "action_intent": "process_select_fd_radiobutton",
+      "node_to_process": "fd",
+      "node_value_type": "id",
+      "next": "process_check_500_checkbox",
+      "error_next": "shut_down"
+    },
+    "process_select_rd_radiobutton": {
+      "action_id": 1001,
+      "action_intent": "process_select_rd_radiobutton",
+      "node_to_process": "rd",
+      "node_value_type": "id",
+      "next": "process_check_500_checkbox",
+      "error_next": "shut_down"
+    },
+    "process_check_500_checkbox": {
+      "action_id": 1002,
+      "action_intent": "process_check_500_checkbox",
+      "node_to_process": "checkbox1",
+      "node_value_type": "id",
+      "next": "process_click_next_button_home_bank",
+      "error_next": "shut_down"
+    },
+    "shut_down": {
+      "action_id": 23,
+      "spoken_feedback": "Encountered a problem, Going Silent"
+    },
+    "okay_see_you_soon":{
+      "action_id":23,
+      "spoken_feedback":"Okay, See you soon. Bye."
+    },
+    "okay_get_that_going_silent":{
+      "action_id":23,
+      "spoken_feedback":"Okay, I get that. Going Silent"
+    },
+    "okay_no_worries_see_you_soon":{
+      "action_id": 23,
+      "spoken_feedback": "Okay! No worries, see you soon"
+    },
+    "perform_go_back": {
+      "action_id": 18,
+      "spoken_feedback": "Okay! See you soon."
+    }
+  },
+  "match_words": {
+    "male": ["male","mail","aadmi","ail","mal","maile","mali","man","main","he"],
+    "Graduate": ["graduate","gaduate","grad,u,ate"],
+    "Postgraduate": ["pg","post","post,graduate","postgraduate","post graduate"],
+    "High School":["high school","high","school","highschool","stool"],
+    "Diploma":["diploma","deploma","ploma","theploma"],
+    "Doctorate":["doctorate","doctor,ate"],
+    "Professional Certification":["professional certification","certi","certified","professional","certificate"],
+    "female": ["female","femail","aurat","feail","femal","femaile","femali","she","ladies"],
+    "other": ["other","order","trans","bi","bye","lesbian","author"],
+    "cancel": [
+      "cancelled",
+      "cancelling",
+      "cancel"
+    ],
+    "go_to_home": [
+      "go,back,home",
+      "home,screen",
+      "home",
+      "dashboard",
+      "dashboards",
+      "dash,board",
+      "homepage",
+      "home,page"
+    ],
+    "go_back": [
+      "go,previous,screen",
+      "go,back,previous,screen",
+      "previous,screen",
+      "back",
+      "go,back",
+      "goback",
+      "Bapa",
+      "exit",
+      "quit"
+    ],
+    "screen_name": [
+      "defaultProfile"
+    ],
+    "last": [
+      "last",
+      "end"
+    ],
+    "delete": [
+      "delete",
+      "remove"
+    ],
+    "select": [
+      "select,this",
+      "choose,this",
+      "select",
+      "choose",
+      "open",
+      "collect",
+      "left",
+      "get,this",
+      "selection"
+    ],
+    "select_fund":[
+      "select",
+      "choose",
+      "chose",
+      "proceed"
+    ],
+    "next": [
+      "next",
+      "agla",
+      "forward"
+    ],
+    "previous": [
+      "previous",
+      "pichla"
+    ],
+    "shut_up": [
+      "silent",
+      "shut,up",
+      "shutup",
+      "stop",
+      "setup",
+      "shut,down",
+      "shutdown"
+    ],
+    "talk_fast": [
+      "talk,fast",
+      "talk,faster",
+      "speak,faster",
+      "top,fast",
+      "top,first",
+      "tos,fast",
+      "top,past",
+      "speak,fast",
+      "peek,fast",
+      "increase,speed",
+      "fast",
+      "faster",
+      "past"
+    ],
+    "talk_slow": [
+      "talk,slow",
+      "talk,less",
+      "talk,slower",
+      "speak,slower",
+      "tonk,slow",
+      "talk,floor",
+      "speak,slow",
+      "peek,slow",
+      "speak,floor",
+      "top,slow",
+      "decrease,speed",
+      "slower",
+      "slow"
+    ],
+    "change_voice": [
+      "change,voice",
+      "change,voices",
+      "change,another,google,voice",
+      "another,google,voice",
+      "other,google,voice",
+      "change,boice"
+    ],
+    "increase_pitch": [
+      "increase,pitch",
+      "increase,pitch,rate",
+      "increase,pitch,rates"
+    ],
+    "decrease_pitch": [
+      "decrease,pitch",
+      "decrease,pitch,rate",
+      "increase,pitch,rates"
+    ],
+    "change_tts": [
+      "change,tts",
+      "tts,change",
+      "change,TTS",
+      "switch,voice",
+      "switch,voices",
+      "change,Tts"
+    ],
+    "repeat": [
+      "repeat",
+      "please,repeat",
+      "say,again",
+      "tell,again",
+      "tell,me",
+      "speak",
+      "again",
+      "speak,again",
+      "read,again",
+      "repeat,again"
+    ],
+    "change_speed": [
+      "change,speed",
+      "change,speech",
+      "speed,change",
+      "speed"
+    ],
+    "google_tts": [
+      "google",
+      "google tts",
+      "google voice"
+    ],
+    "auto": [
+      "auto"
+    ],
+    "eloquence": [
+      "ETI",
+      "eloquence",
+      "elequence"
+    ],
+    "vocalizer": [
+      "vocalizer",
+      "vocalyzer",
+      "vocalyser",
+      "vocaliser"
+    ],
+    "samsung": [
+      "samsung",
+      "samson",
+      "samsong",
+      "samsung text to speech"
+    ],
+    "acapela": [
+      "acapela",
+      "akapela"
+    ],
+    "fast": [
+      "fast",
+      "faster",
+      "fastest"
+    ],
+    "slow": [
+      "slow",
+      "slower",
+      "slowest"
+    ],
+    "years" : [
+      "year",
+      "years",
+      "ear",
+      "ears",
+      "yours"
+    ],
+    "first": [
+      "first",
+      "one",
+      "1",
+      "1st",
+      "first one",
+      "First"
+    ],
+    "second": [
+      "second",
+      "two",
+      "2nd",
+      "2",
+      "Second"
+    ],
+    "all": [
+      "all",
+      "both",
+      "boat",
+      "booth"
+    ],
+    "view_all": [
+      "all",
+      "view,all"
+    ],
+    "ignore_words_from_api_response": [
+      "oh",
+      "beep",
+      "thank",
+      "you",
+      "thankyou",
+      "bye"
+    ],
+    "rupees": [
+      "rupees",
+      "rupes",
+      "rupess",
+      "thousand",
+      "rupee",
+      "lac",
+      "rps",
+      "minus",
+      "plus",
+      "amount",
+      "rs",
+      "is"
+    ],
+    "read": [
+      "read",
+      "read,funds",
+      "browse,funds",
+      "show,funds",
+      "see",
+      "see,funds"
+    ],
+    "fund_name_start_words":[
+      "in",
+      "through",
+      "to",
+      "for",
+      "search"
+    ],
+    "remove_fund_words":[
+      "in",
+      "buy",
+      "by"
+    ],
+    "fund_name_end_words": [
+      "rupees",
+      "rs",
+      "through",
+      "via",
+      "by"
+    ],
+    "search":[
+      "search",
+      "invest"
+    ],
+    "amount_suffix": [
+      "amounts",
+      "amount",
+      "only",
+      "rupees",
+      "rupee",
+      "rs.",
+      "rs",
+      "bucks",
+      "bugs",
+      "bug",
+      "buxed",
+      "bux",
+      "buck",
+      "works",
+      "work",
+      "funds",
+      "fund",
+      "fun",
+      "paise",
+      "paisey",
+      "paisaa",
+      "box"
+    ],
+    "paise": [
+      "paise",
+      "paisa",
+      "pesos",
+      "paisey",
+      "paisaa",
+      "pesa",
+      "pese"
+    ],
+    "lakh": [
+      "lacks",
+      "lack",
+      "lakhs",
+      "lakh",
+      "lacs",
+      "lac",
+      "leg",
+      "black",
+      "luck",
+      "lucks",
+      "lpa",
+      "lba"
+    ],
+    "crore": [
+      "crores",
+      "crore"
+    ],
+    "thousand": [
+      "thousands",
+      "thousand"
+    ],
+    "hundred": [
+      "hundreds",
+      "hundred"
+    ],
+    "minus": [
+      "minus",
+      "-"
+    ],
+    "negative_matchword":[
+     "do,not",
+     "don't",
+     "not",
+     "nothing"
+    ],
+    "invest": [
+      "invest",
+      "invest,more"
+    ],
+    "doller_match_words": [
+      "doller",
+      "dollers",
+      "$",
+      "usd",
+      "dollar",
+      "dollars",
+      "cent",
+      "cents"
+    ],
+    "doller_symbol": [
+      "$"
+    ],
+    "extra_words_for_amount": [
+      "fund",
+      "funds",
+      "months",
+      "month",
+      "years",
+      "year",
+      "monthly",
+      "yearly"
+    ]
+  },
+
+  "ids": {
+   
+  }
+}
