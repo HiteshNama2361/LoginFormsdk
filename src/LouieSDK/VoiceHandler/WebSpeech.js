@@ -239,7 +239,7 @@ function decrypt(cipherText, secret, iv) {
             if (formattedResult?.includes(",")) {
                 // formattedResult = formattedResult.replaceAll(","," ");
                 formattedResult = formattedResult.split(",").join(" ");
-            //    console.log("formatted result 3 =",formattedResult);
+               console.log("formatted result after removing ',' with space =",formattedResult);
             }
             if ((formattedResult?.trim(0).endsWith(".") || (newText?.trim(0).endsWith("!")))) {
                 console.log("testing-1","testing");
