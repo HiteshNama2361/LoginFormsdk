@@ -326,6 +326,7 @@ export function isAmountInDoller() {
 
 // Helper function to remove hyphens and dots in between characters where applicable
 const removeHyphensAndDotsWhenAfterEveryLetter = (text) => {
+    console.log("removeHyphenfunctionclles",text);
   let result = '';
   let alnumCount = 0;
   let specialCharCount = 0;
@@ -363,7 +364,7 @@ const removeHyphensAndDotsWhenAfterEveryLetter = (text) => {
     const tempStr = tempArr.join('');
     result += tempStr.includes('-') ? tempStr.replace(/-/g, '') : tempStr;
   }
-
+  console.log("removeHyphenfunctioncalles",result);
   return result;
 };
 
@@ -420,6 +421,12 @@ export const gmailEmailIdCorrection = (phraseOrg) => {
     if (phrase.includes("@yahoo") && !phrase.includes("@yahoo.com")) {
       phrase = phrase.replace("@yahoo", "@yahoo.com");
     }
+    if (phrase.includes("@outlook") && !phrase.includes("@outlook.com")) {
+        phrase = phrase.replace("@outlook", "@outlook.com");
+    }
+    if (phrase.includes("@hotmail") && !phrase.includes("@hotmail.com")) {
+    phrase = phrase.replace("@hotmail", "@hotmail.com");
+    }
     
     // You can add more domains like "@outlook", "@hotmail", etc. similarly if needed.
     
@@ -458,7 +465,8 @@ export const getEmailIdFromVoiceResult = (rawVoiceResult) => {
 
 //   for (const voice of rawVoiceResult) {
 //     console.log("inside getemailloop");
-    var processedText = ViewParser.removeUnwantedPrefixAndSuffixChar(removeHyphensAndDotsWhenAfterEveryLetter(rawVoiceResult));
+    // var processedText = ViewParser.removeUnwantedPrefixAndSuffixChar(removeHyphensAndDotsWhenAfterEveryLetter(rawVoiceResult));
+    var processedText = ViewParser.removeUnwantedPrefixAndSuffixChar(rawVoiceResult);
     console.log("processedText",processedText);
     const emailId = gmailEmailIdCorrection(processedText);
     console.log("emailId",emailId);
@@ -467,9 +475,7 @@ export const getEmailIdFromVoiceResult = (rawVoiceResult) => {
       return emailId;
     }else if (emailId.includes('@') && !emailId.endsWith('.com')) {
         // Add '.com' if common domain but incomplete
-        if (emailId.includes('gmail') || emailId.includes('yahoo')) {
             return emailId + '.com';
-        }
     // }
   }
 
@@ -619,75 +625,6 @@ export function getAmountFromVoiceResultText(text) {
 
     console.log("spiltArray length =",splitTextArr.length + splitTextArr[0]);
 
-    // if(splitTextArr.length === 1 && (splitTextArr[0] === "crore" || splitTextArr[0] === "lakh" || splitTextArr[0] === "thousand" || splitTextArr[0] === "hundred" )){
-    //     console.log("values is thousand")
-    //     if(splitTextArr[0] === "thousand"){
-    //         console.log("value formatted to 1000 ");
-    //         result=1000.0;
-    //         found=true;
-    //     }else if(splitTextArr[0] === "crore"){
-    //         console.log("value formatted to crore ");
-    //         result=10000000.0;
-    //         found=true;
-    //     }else if(splitTextArr[0] === "lakh"){
-    //         console.log("value formatted to lakh ");
-    //         result=100000.0;
-    //         found=true;
-    //     }else if(splitTextArr[0] === "hundred"){
-    //         console.log("value formatted to hundred ");
-    //         result=100.0;
-    //         found=true;
-    //     }
-    // }else{
-    //     console.log("in----", splitTextArr[0], splitTextArr[1]);
-    //     if(isNaN(splitTextArr[0]))splitTextArr[0] = englishNumberMatchWordsMap.get(splitTextArr[0]);
-    //     console.log("arraya", splitTextArr[0], splitTextArr[1], finalAmount);
-    //     finalAmount = splitTextArr[0] + " "+ splitTextArr[1];
-    //     for (const splitText of splitTextArr) {
-    //        // if(splitText)splitText = splitText.toLowerCase();
-    //         if (!textContainsOnlySingleDigitsNumber(finalAmount)) {
-    //             console.log("checking ",splitText)
-    //             if (textContainsAnyMatchWord('crore', splitText)) {
-    //                 result = result !== 0.0 ? result - currentNum + currentNum * 10000000 : currentNum * 10000000;
-    //                 currentNum = 0.0;
-    //             } else if (textContainsAnyMatchWord('lakh', splitText)) {
-    //                 result = result !== 0.0 ? result - currentNum + currentNum * 100000 : currentNum * 100000;
-    //                 currentNum = 0.0;
-    //             } else if (textContainsAnyMatchWord('thousand', splitText)) {
-    //                 result = result !== 0.0 ? result - currentNum + currentNum * 1000 : currentNum * 1000;
-    //                 currentNum = 0.0;
-    //             } else if (textContainsAnyMatchWord('hundred', splitText)) {
-    //                 result = result !== 0.0 ? result - currentNum + currentNum * 100 : currentNum * 100;
-    //                 currentNum = 0.0;
-    //             } else {
-    //                 console.log("amount is as :", splitText);
-    //                 let amount = parseFloat(splitText);
-    //                 console.log("inside this", amount);
-    //                 if (isNaN(amount)) {
-    //                     console.log("inside updated", amount);
-    //                     amount = englishNumberMap[splitText] !== undefined
-    //                         ? parseFloat(englishNumberMap[splitText])
-    //                         : null;
-    //                 }
-    //                 console.log("amount 2", amount, result);
-    //                 if (amount !== null) {
-    //                     found = true;
-    //                     if (result === 0.0 || result > Math.abs(amount)) {
-    //                         result += Math.abs(amount);
-    //                         currentNum = Math.abs(amount);
-    //                     }
-    //                 }
-    //             }
-    //         } else {
-    //             const amount = parseFloat(splitText) || null;
-    //             console.log("amount is as :",amount);
-    //             if (amount !== null) {
-    //                 found = true;
-    //                 result = result * 10 + amount;
-    //             }
-    //         }
-    //     }
-    // }
     for (let splittext of splitTextArr) {
         if (!textContainsOnlySingleDigitsNumber(finalAmount)) {
             if (textContainsAnyMatchWord("crore", splittext.toLowerCase())) {
