@@ -236,9 +236,9 @@ function decrypt(cipherText, secret, iv) {
             //     formattedResult = formattedResult.replaceAll(".","");
             //     console.log("formatted result 2 =",formattedResult);
             // }
-            if (formattedResult?.includes("-")) {
-                // formattedResult = formattedResult.replaceAll("-"," ");
-                formattedResult = formattedResult.split("-").join(" ");
+            if (formattedResult?.includes(",")) {
+                // formattedResult = formattedResult.replaceAll(","," ");
+                formattedResult = formattedResult.split(",").join(" ");
             //    console.log("formatted result 3 =",formattedResult);
             }
             if ((formattedResult?.trim(0).endsWith(".") || (newText?.trim(0).endsWith("!")))) {
