@@ -1,303 +1,3 @@
-// import CryptoJS from "crypto-js";
-// //import axios from "axios";
-// import startMicSound from "../sound/start_rec.mp3";
-// import micCloseSound from "../sound/mic_close.mp3";
-// import { isVoiceSessionActive } from "../LouieSDK";
-// import { createAbortController } from '../utils/ContextFinder';
-// const TAG = "ReactNativeSpeech";
-// const voicecallback = require('./VoiceEventProcessor');
-
-// const CustomUtils = require('../utils/CustomUtils');
-// // export let isListening = false;
-// // let threshold = 0.0;
-// // let sampleData = [];
-// // let currSampleData = [];
-// let micDetectionTime = Date.now();
-// let silenceDetection = Date.now();
-// // let mediaRecorder = null;
-// let recordingChunks = [];
-// let audioUrl = null;
-// let decryptedAudio = null;
-// let encryptedAudio = null;
-
-// export const setIsListening = (isListeningTemp) => {
-//   isListening = isListeningTemp;
-// }
-
-// export let isListening = false;
-// let threshold = 2;
-// let thresholdSet = false;
-// let sampleData = [];
-// let currSampleData = [];
-// let belowThresholdStartTime = null;
-// let mediaRecorder = null;
-// let audioContext;
-// let analyser;
-// let microphone;
-// let dataArray;
-// let controller;
-
-// // export const setIsListening = (isListeningTemp) => {
-// //   isListening = isListeningTemp;
-// // };
-
-// export function startListening() {
-//   if (isVoiceSessionActive) {
-//     console.log("startRecording function called");
-//     if (typeof MediaRecorder === 'undefined') {
-//       console.error("MediaRecorder is not supported in this browser.");
-//       return;
-//     }
-
-//     const audio = new Audio(startMicSound);
-//     audio.play().then(() => console.log("Microphone start sound played"))
-//       .catch((error) => console.error("Error playing start mic sound:", error));
-
-//     isListening = true;
-//     thresholdSet = false;
-//     sampleData = [];
-//     currSampleData = [];
-//     belowThresholdStartTime = null;
-
-//     navigator.mediaDevices.getUserMedia({ audio: true })
-//       .then((stream) => {
-//         console.log("Microphone access granted.");
-//         mediaRecorder = new MediaRecorder(stream);
-//         // controller = createAbortController();
-
-//         mediaRecorder.ondataavailable = (event) => {
-//           if (event.data.size > 0) {
-//             console.log("Data available:", event.data);
-//           }
-//         };
-
-//         mediaRecorder.onstop = () => {
-//           console.log("Recording stopped.");
-//         };
-
-//         mediaRecorder.onerror = (event) => {
-//           console.error("Recorder error:", event.error);
-//         };
-
-//         mediaRecorder.start();
-//         console.log("MediaRecorder started");
-
-//         audioContext = new (window.AudioContext || window.webkitAudioContext)();
-//         analyser = audioContext.createAnalyser();
-//         microphone = audioContext.createMediaStreamSource(stream);
-//         microphone.connect(analyser);
-//         analyser.fftSize = 256;
-//         dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-//         logAmplitude();
-//       })
-//       .catch((error) => {
-//         console.error('Error accessing microphone:', error);
-//       });
-//   }
-// }
-
-// function logAmplitude() {
-//   analyser.getByteTimeDomainData(dataArray);
-
-//   let sum = 0;
-//   for (let i = 0; i < dataArray.length; i++) {
-//     sum += (dataArray[i] - 128) ** 2;
-//   }
-//   const amplitude = Math.sqrt(sum / dataArray.length);
-
-//   if (!thresholdSet) {
-//     if (sampleData.length <= 4) {
-//       sampleData.push(amplitude);
-//     } else {
-//       const sortedAmplitudes = sampleData.sort((a, b) => b - a);
-//       const [a, b, c] = [sortedAmplitudes[0], sortedAmplitudes[1], sortedAmplitudes[2]];
-//       if (a > b + c) {
-//         threshold = (b + c) / 2;
-//       } else {
-//         threshold = (a + b + c) / 3;
-//       }
-//       threshold = Math.max(threshold * 0.85, 2);
-//       console.log('Threshold set to:', threshold);
-//       thresholdSet = true;
-//     }
-//   } else {
-//     if (amplitude < threshold) {
-//       if (!belowThresholdStartTime) {
-//         belowThresholdStartTime = Date.now();
-//       } else if (Date.now() - belowThresholdStartTime >= 1500) {
-//         console.log('Amplitude below threshold for 1500ms. Stopping recording.');
-//         stopListening();
-//         return;
-//       }
-//     } else {
-//       belowThresholdStartTime = null;
-//     }
-//   }
-
-//   setTimeout(logAmplitude, 500);
-// }
-
-// export function stopListening() {
-//   if (mediaRecorder && mediaRecorder.state === 'recording') {
-//     console.log("Stopping recording...");
-//     mediaRecorder.stop();
-//     mediaRecorder.stream.getTracks().forEach(track => track.stop());
-//     isListening = false;
-//     const audio = new Audio(micCloseSound);
-//     audio.play().then(() => console.log("Microphone stop sound played"))
-//       .catch((error) => console.error("Error playing stop mic sound:", error));
-//     if (audioContext) {
-//       audioContext.close();
-//     }
-//   }
-// }
-
-// // setInterval(() => {
-// //   if (isListening) {
-// //     const amp = Math.random() * 10;  // Simulate audio amplitude
-// //     checkAudio(amp);
-// //   }
-// // }, 500);
-
-// async function handleAudioProcessing(blob) {
-//   try {
-//     const arrayBuffer = await blob.arrayBuffer();
-//     const byteArray = new Uint8Array(arrayBuffer);
-//     //console.log('Byte array saved:', byteArray);
-
-//     const secret = generateRandomString(32);
-//     const iv = generateRandomString(16);
-//     const encrypted = encryptByteArray(byteArray, secret, iv);
-//     encryptedAudio = encrypted;
-//     //console.log('Encrypted data:', encrypted);
-//   } catch (error) {
-//     console.error('Error processing audio:', error);
-//   }
-// }
-
-// function encryptByteArray(byteArray, secret, ivStr) {
-//   const wordArray = CryptoJS.lib.WordArray.create(byteArray);
-//   const key = CryptoJS.enc.Utf8.parse(secret);
-//   const iv = CryptoJS.enc.Utf8.parse(ivStr);
-
-//   try {
-//     const encrypted = CryptoJS.AES.encrypt(wordArray, key, {
-//       iv: iv,
-//       mode: CryptoJS.mode.CBC,
-//       padding: CryptoJS.pad.Pkcs7
-//     });
-
-//     const encryptedBase64 = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
-//     //console.log("Encrypted Base64 data:", encryptedBase64);
-
-//     const formData = new FormData();
-//     formData.append('audio', encryptedBase64);
-//     formData.append('key', secret);
-//     formData.append('iv', ivStr);
-//     formData.append('isByteArray', "True");
-//     formData.append('lang', 'en');
-
-//     fetch('https://gabbar-dev-apigw.dev.louieapis.net/transcribe', {
-//       method: 'POST',
-//       body: formData,
-//       headers: {
-//         'x-api-key': 'qnqaHajoo14ZETQrIzqOr8FnxxiG4mqm9UYEMtD5'
-//       }
-//     })
-//     .then(response => response.json())
-//     .then(data => {
-//       //console.log('Server response:', data);
-//       decrypt(data.text, secret, ivStr);
-//     })
-//     .catch(error => console.error('Error sending data to server:', error));
-
-//     return encryptedBase64;
-//   } catch (error) {
-//     console.error('Error encrypting data:', error);
-//     return null;
-//   }
-// }
-
-
-// function decrypt(cipherText, secret, iv) {
-//   try {
-//     const key = CryptoJS.enc.Utf8.parse(secret);
-//     const ivParsed = CryptoJS.enc.Utf8.parse(iv);
-
-//     const decrypted = CryptoJS.AES.decrypt(cipherText, key, {
-//       iv: ivParsed,
-//       mode: CryptoJS.mode.CBC,
-//       padding: CryptoJS.pad.Pkcs7
-//     });
-
-//     const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-//     if (decryptedText) {
-//       console.log("Decrypted text:", decryptedText);
-//        decryptedAudio = decryptedText;
-//        var newresponse = decryptedText;
-//       if (!newresponse || newresponse.toLowerCase().includes("thanks for watching")) {
-//         var isRecognitionActive = false;
-//         if (voicecallback) {
-//             voicecallback.onVoiceError(2);
-//         }
-//       } else {
-//         var newText = CustomUtils.removeExtraWordsFromApiResponse(newresponse);
-//         if (newText === null) {
-//             voicecallback.onVoiceError(newText);
-//         } else {
-//             var formattedResult = newText?.toLowerCase();
-//             voicecallback.setRawVoiceResult(newresponse);
-//         //    console.log("formatted result 1 =",formattedResult);
-//             // if (formattedResult.includes(".")) {
-//             //     formattedResult = formattedResult.replaceAll(".","");
-//             //     console.log("formatted result 2 =",formattedResult);
-//             // }
-//               if (formattedResult?.includes(",")) {
-//                 // formattedResult = formattedResult.replaceAll("-"," ");
-//                 // if(process.node_to_process!='email'){
-//                   console.log("contains commas",formattedResult);
-//                   formattedResult = formattedResult.split(",").join(" ");
-//                   console.log("contains commas not now",formattedResult);
-//                 // }
-//             //    console.log("formatted result 3 =",formattedResult);
-//               }
-//             if ((formattedResult?.trim(0).endsWith(".") || (newText?.trim(0).endsWith("!")))) {
-//                 console.log("testing-1","testing");
-//                 formattedResult = formattedResult.slice(0,-1);
-//             //    console.log("formatted result 4 =",formattedResult);
-//                 voicecallback.onVoiceEvent(formattedResult);
-//             } else {
-//                 console.log("testing-2","testing");
-//              //   console.log("formatted result 5 =",formattedResult);
-//                 voicecallback.onVoiceEvent(formattedResult?.trim(0).toLowerCase());
-//             }
-//             console.log("Final result",formattedResult);
-//         }
-//       }
-//       // const decryptedTextElement = document.getElementById('decryptedText');
-//       //  document.getElementById('decryptedAudio').textContent = decryptedText;
-//     } else {
-//       console.error("Decryption returned empty result.");
-//     }
-//   } catch (error) {
-//     console.error("Error decrypting text:", error);
-//   }
-// }
-
-
-
-
-// function generateRandomString(length) {
-//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//   let randomString = '';
-//   for (let i = 0; i < length; i++) {
-//     const randomIndex = Math.floor(Math.random() * characters.length);
-//     randomString += characters.charAt(randomIndex);
-//   }
-//   return randomString;
-// }
-
 import CryptoJS from "crypto-js";
 //import axios from "axios";
 import startMicSound from "../sound/start_rec.mp3";
@@ -307,7 +7,7 @@ const TAG = "ReactNativeSpeech";
 const voicecallback = require('./VoiceEventProcessor');
 const CustomUtils = require('../utils/CustomUtils');
 export let isListening = false;
-let threshold = 0.0;
+let threshold = 1.5;
 let sampleData = [];
 let currSampleData = [];
 let micDetectionTime = Date.now();
@@ -319,6 +19,12 @@ let decryptedAudio = null;
 let encryptedAudio = null;
 let micTotalTimeTaken;
 let micStartTime;
+let belowThresholdStartTime = null;
+let thresholdSet = false;
+let audioContext;
+let analyser;
+let microphone;
+let dataArray;
 
 export const setIsListening = (isListeningTemp) => {
   isListening = isListeningTemp;
@@ -339,6 +45,8 @@ export function startListening() {
   silenceDetection = Date.now();
 
   recordingChunks = [];
+  thresholdSet = false;
+  belowThresholdStartTime = null;
   //console.log("Recording started, micDetectionTime:", micDetectionTime);
 
   navigator.mediaDevices.getUserMedia({ audio: true })
@@ -373,57 +81,126 @@ export function startListening() {
         console.error("Recorder error:", event.error);
       };
 
-      micStartTime = Date.now();
-      console.log("micStartTime", micStartTime);
+      // micStartTime = Date.now();
+      // console.log("micStartTime", micStartTime);
 
       mediaRecorder.start();
       console.log("MediaRecorder started");
+      micStartTime = Date.now();
+      console.log("micStartTime", micStartTime);
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        microphone = audioContext.createMediaStreamSource(stream);
+        microphone.connect(analyser);
+        analyser.fftSize = 256;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        logAmplitude();
     })
     .catch((error) => {
       console.error('Error accessing microphone:', error);
     });
 }
 
-function checkAudio(amp) {
-  const now = Date.now();
-  //console.log(`Current amplitude: ${amp}`, `Time since last mic detection: ${now - micDetectionTime} ms`, `Threshold is: ${threshold}`);
-  if (now - micDetectionTime < 3000) {
-    //console.log(`Time since last microphone detection: ${now - micDetectionTime} ms`);
-    sampleData.push(amp);
-    silenceDetection = now;
-  } else {
-    currSampleData.push(amp);
-    if (threshold === 0) {
-      // sampleData.push(amp);
-      let data = [...sampleData, amp];
+// function checkAudio(amp) {
+//   const now = Date.now();
+//   //console.log(`Current amplitude: ${amp}`, `Time since last mic detection: ${now - micDetectionTime} ms`, `Threshold is: ${threshold}`);
+//   if (now - micDetectionTime < 3000) {
+//     //console.log(`Time since last microphone detection: ${now - micDetectionTime} ms`);
+//     sampleData.push(amp);
+//     silenceDetection = now;
+//   } else {
+//     currSampleData.push(amp);
+//     if (threshold === 0) {
+//       // sampleData.push(amp);
+//       let data = [...sampleData, amp];
 
-      if (data.length >= 4) {
-        //console.log("Before sorting:", data);
-        data.sort((a, b) => a - b);
-        //console.log("After sorting:", data);
-        // console.log("Sorted Sample data:", sampleData);
+//       if (data.length >= 4) {
+//         //console.log("Before sorting:", data);
+//         data.sort((a, b) => a - b);
+//         //console.log("After sorting:", data);
+//         // console.log("Sorted Sample data:", sampleData);
 
-        const lastThree = data.slice(-3);
-        const maxValue = lastThree.reduce((acc, val) => acc + val, 0) / lastThree.length;
+//         const lastThree = data.slice(-3);
+//         const maxValue = lastThree.reduce((acc, val) => acc + val, 0) / lastThree.length;
 
-        // threshold = maxValue;
-        const newThreshold = (maxValue < 1 ? 1 : maxValue);
-        threshold = newThreshold;
-        //console.log(`New threshold set to ${newThreshold}`);
-      }
-    }
-    if (amp < threshold) {
-      if (now - silenceDetection > 1500) {
-        console.log("Silence detected. Stopping recording...");
-        stopListening();
-      } else {
-        console.log(`Silence detection time: ${now - silenceDetection} ms`);
-      }
-    } else {
-      silenceDetection = now;
-      console.log("Amplitude > threshold");
-    }
+//         // threshold = maxValue;
+//         const newThreshold = (maxValue < 1 ? 1 : maxValue);
+//         threshold = newThreshold;
+//         //console.log(`New threshold set to ${newThreshold}`);
+//       }
+//     }
+//     if (amp < threshold) {
+//       if (now - silenceDetection > 1500) {
+//         console.log("Silence detected. Stopping recording...");
+//         stopListening();
+//       } else {
+//         console.log(`Silence detection time: ${now - silenceDetection} ms`);
+//       }
+//     } else {
+//       silenceDetection = now;
+//       console.log("Amplitude > threshold");
+//     }
+//   }
+// }
+
+function logAmplitude() {
+  analyser.getByteTimeDomainData(dataArray);
+
+  let sum = 0;
+  for (let i = 0; i < dataArray.length; i++) {
+      sum += (dataArray[i] - 128) ** 2;
   }
+  const amplitude = Math.sqrt(sum / dataArray.length);
+  
+  console.log('Amplitude:', amplitude);
+
+  if (!thresholdSet) {
+      if (sampleData.length < 4) { 
+        sampleData.push(amplitude);
+      }
+      if (sampleData.length === 4) {
+          
+          console.log('Observed amplitudes:', sampleData);
+          const sortedAmplitudes = sampleData.sort((a, b) => b - a);
+          const a = sortedAmplitudes[0];
+          const b = sortedAmplitudes[1];
+          const c = sortedAmplitudes[2];
+          
+          if (a > b + c) {
+              threshold = (b + c) / 2;
+          } else {
+              threshold = (a + b + c) / 3;
+          }
+          // if (threshold < 2) {
+          //     threshold = 2;
+          // }
+          threshold = 0.75 * threshold;
+          if(threshold <=1){
+            threshold = 1;
+          }
+          console.log('Threshold set to:', threshold);
+          thresholdSet = true;
+
+          
+          belowThresholdStartTime = null;
+      }
+  } else {
+      
+      if (amplitude < threshold) {
+          if (belowThresholdStartTime === null) {
+              belowThresholdStartTime = Date.now();
+          } else if (Date.now() - belowThresholdStartTime >= 1500) {
+              console.log('Amplitude below threshold for 1500ms. Stopping recording.');
+              stopListening();
+              return;
+          }
+      } else {
+          belowThresholdStartTime = null; 
+      }
+  }
+
+   setTimeout(logAmplitude, 500); 
 }
 
 export function stopListening() {
@@ -444,12 +221,12 @@ export function stopListening() {
   }
 }
 
-setInterval(() => {
-  if (isListening) {
-    const amp = Math.random() * 10;  // Simulate audio amplitude
-    checkAudio(amp);
-  }
-}, 500);
+// setInterval(() => {
+//   if (isListening) {
+//     const amp = Math.random() * 10;  // Simulate audio amplitude
+//     checkAudio(amp);
+//   }
+// }, 500);
 
 async function handleAudioProcessing(blob) {
   try {
@@ -550,7 +327,8 @@ function decrypt(cipherText, secret, iv) {
                console.log("formatted result after removing ',' with space =",formattedResult);
             }
             // console.log("kya yha tk aa rha ????");
-            toast.success(formattedResult);
+            // toast.success(formattedResult);
+            toast.success(`${formattedResult} ${micTotalTimeTaken}`);
 
             if ((formattedResult?.trim(0).endsWith(".") || (newText?.trim(0).endsWith("!")))) {
                 console.log("testing-1","testing");

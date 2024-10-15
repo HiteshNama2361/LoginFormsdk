@@ -415,18 +415,18 @@ export const gmailEmailIdCorrection = (phraseOrg) => {
     });
     
     // After correcting, check if the domain is incomplete (like "gmail") and append ".com"
-    if (phrase.includes("@gmail") && !phrase.includes("@gmail.com")) {
-      phrase = phrase.replace("@gmail", "@gmail.com");
-    }
-    if (phrase.includes("@yahoo") && !phrase.includes("@yahoo.com")) {
-      phrase = phrase.replace("@yahoo", "@yahoo.com");
-    }
-    if (phrase.includes("@outlook") && !phrase.includes("@outlook.com")) {
-        phrase = phrase.replace("@outlook", "@outlook.com");
-    }
-    if (phrase.includes("@hotmail") && !phrase.includes("@hotmail.com")) {
-    phrase = phrase.replace("@hotmail", "@hotmail.com");
-    }
+    // if (phrase.includes("@gmail") && !phrase.includes("@gmail.com")) {
+    //   phrase = phrase.replace("@gmail", "@gmail.com");
+    // }
+    // if (phrase.includes("@yahoo") && !phrase.includes("@yahoo.com")) {
+    //   phrase = phrase.replace("@yahoo", "@yahoo.com");
+    // }
+    // if (phrase.includes("@outlook") && !phrase.includes("@outlook.com")) {
+    //     phrase = phrase.replace("@outlook", "@outlook.com");
+    // }
+    // if (phrase.includes("@hotmail") && !phrase.includes("@hotmail.com")) {
+    // phrase = phrase.replace("@hotmail", "@hotmail.com");
+    // }
     
     // You can add more domains like "@outlook", "@hotmail", etc. similarly if needed.
     
@@ -438,18 +438,18 @@ export const gmailEmailIdCorrection = (phraseOrg) => {
 const checkIfEmailIsValidAndComplete = (email) => {
     if (email.includes("@")) {
         const afterAtText = email.split("@")[1];
-        
-        if (afterAtText.includes(".")) {
-          const afterDotText = afterAtText.split(".")[1];
-          
-          // Ensure there's something after the dot
-          return afterDotText.length > 0;
+        if (afterAtText && afterAtText.includes(".")) {
+        const beforeDotText = afterAtText.split(".")[0];
+        const afterDotText = afterAtText.split(".")[1];
+
+        // Ensure there's something before the dot and after the dot
+        return beforeDotText.length > 0 && afterDotText.length > 0;
         } 
         
         // If no dot found, append ".com" for common domains
-        if (afterAtText === "gmail" || afterAtText === "yahoo") {
-          return true;
-        }
+        // if (afterAtText === "gmail" || afterAtText === "yahoo") {
+        //   return true;
+        // }
         
         return false;
       } else {
@@ -473,11 +473,12 @@ export const getEmailIdFromVoiceResult = (rawVoiceResult) => {
 
     if (checkIfEmailIsValidAndComplete(emailId)) {
       return emailId;
-    }else if (emailId.includes('@') && !emailId.endsWith('.com')) {
+    }
+// else if (emailId.includes('@') && !emailId.endsWith('.com')) {
         // Add '.com' if common domain but incomplete
-            return emailId + '.com';
-    // }
-  }
+//             return emailId + '.com';
+//     // }
+//   }
 
   return null;
 };

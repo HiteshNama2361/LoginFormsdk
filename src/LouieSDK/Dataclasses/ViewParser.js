@@ -35,7 +35,7 @@ export const removeUnwantedPrefixAndSuffixChar = (text) => {
   let result = text;
   result = result.trim();
   result = result.replace(/^www\./, "");
-  result = result.replace(/\.com$/, "");
+  // result = result.replace(/\.com$/, "");
     
   if (result.length > 0 && !result.charAt(result.length - 1).match(/[a-zA-Z0-9]/)) {
     result = result.substring(0, result.length - 1);
@@ -54,7 +54,7 @@ export const removeUnwantedSuffixChar = (text) => {
   let result = text;
   result = result.trim().toLowerCase();
   result = result.replace(/^www\./, '');
-  result = result.replace(/\.com$/, '');
+  // result = result.replace(/\.com$/, '');
   result = result.replace("rs.", "rs ");
   result = result.replace(/-/g, ''); // Use the 'g' flag for global replacement
 

@@ -862,30 +862,104 @@ export const handleCommandByPhrase = async (result) => {
                 return;
             }
         }else if(process.node_to_process === 'education'){
-            const resultArray = [];
-                        // Normalize the input string (convert to lowercase and replace special characters)
-            const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
-            const matchWords = matchWordsJson.match_words;
+            // const resultArray = [];
+            //             // Normalize the input string (convert to lowercase and replace special characters)
+            // const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
+            // const matchWords = matchWordsJson.match_words;
 
-            // Split the normalized string into words
-            const words = normalizedStr.split(/\s+/); // Split by spaces
+            // // Split the normalized string into words
+            // const words = normalizedStr.split(/\s+/); // Split by spaces
             
-            // Iterate through each key in the matchWords object
-            for (const key in matchWords) {
-                const wordVariants = matchWords[key];
-                for (let word of words) {
-                const joinedWord = words.join(" ");
-                if (wordVariants.some(variant => variant === word || joinedWord.includes(variant))) {
-                    if (!resultArray.includes(key)) {
-                    resultArray.push(key);
-                    }
-                }
-                }
+            // // Iterate through each key in the matchWords object
+            // for (const key in matchWords) {
+            //     const wordVariants = matchWords[key];
+            //     for (let word of words) {
+            //     const joinedWord = words.join(" ");
+            //     if (wordVariants.some(variant => variant === word || joinedWord.includes(variant))) {
+            //         if (!resultArray.includes(key)) {
+            //         resultArray.push(key);
+            //         }
+            //     }
+            //     }
+            // }
+            const resultArray = [];
+// Normalize the input string (convert to lowercase and replace special characters)
+const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
+const matchWords = matchWordsJson.match_words;
+
+// First, check for multi-word matches (like "post graduate")
+for (const key in matchWords) {
+    const wordVariants = matchWords[key];
+
+    // Detect multi-word match in `normalizedStr`
+    const multiWordMatch = wordVariants.some(variant => normalizedStr.includes(variant) && variant.includes(" "));
+    if (multiWordMatch) {
+        if (!resultArray.includes(key)) {
+            resultArray.push(key);
+        }
+    }
+}
+
+// Now check for single-word matches
+const words = normalizedStr.split(/\s+/); // Split by spaces
+for (const key in matchWords) {
+    const wordVariants = matchWords[key];
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+
+        // Check for "Graduate" without "Post" immediately before it
+        if (key === "Graduate" && word === "graduate") {
+            if (i > 0 && words[i - 1] === "post") {
+                continue; // Skip if "graduate" is preceded by "post"
             }
+        }
+
+        // Add to resultArray if there's a match and it's not already included
+        if (wordVariants.includes(word) && !resultArray.includes(key)) {
+            resultArray.push(key);
+        }
+    }
+}
+
+console.log(resultArray);
+
             if(resultArray.length!==0){
                 result=resultArray;
             }else{
                 console.log("length is zero");
+                handleVoiceError();
+                return;
+            }
+        }
+        if(process.node_to_process === 'phone' || process.node_to_process === 'pin'){
+            const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+            const pinRegex = /^(\+\d{1,3}[- ]?)?\d{6}$/;
+            // let result = "one two double two triple five";
+            // Define replacements for numbers and patterns
+            const replacements = {
+            "\\bone\\b": "1",
+            "\\btwo\\b": "2",
+            "\\bthree\\b": "3",
+            "\\bfour\\b": "4",
+            "\\bfive\\b": "5",
+            "\\bsix\\b": "6",
+            "\\bseven\\b": "7",
+            "\\beight\\b": "8",
+            "\\bnine\\b": "9",
+            "\\bzero\\b": "0",
+            "\\bdouble (\\w+)\\b": (match, p1) => p1 + p1, // Matches "double <number word>"
+            "\\btriple (\\w+)\\b": (match, p1) => p1 + p1 + p1 // Matches "triple <number word>"
+            };
+
+            // Apply each replacement using regular expressions
+            console.log("before replacement of one with 1 etc",result);
+            for (const [pattern, replacement] of Object.entries(replacements)) {
+            result = result.replace(new RegExp(pattern, "gi"), replacement);
+            }
+            result = result?.replace(/ /g, '');
+            console.log("after replacement of one with 1 etc",result); // Outputs: "1 2 22 555"
+            if(process.node_to_process === 'phone' && phoneRegex.test(result) === false || process.node_to_process === 'pin' && pinRegex.test(result) === false){
                 handleVoiceError();
                 return;
             }
@@ -895,12 +969,6 @@ export const handleCommandByPhrase = async (result) => {
         }
         
         console.log("result ", result);
-        const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
-        const pinRegex = /^(\+\d{1,3}[- ]?)?\d{6}$/;
-        if(process.node_to_process === 'phone' && phoneRegex.test(result) === false || process.node_to_process === 'pin' && pinRegex.test(result) === false){
-            handleVoiceError();
-            return;
-        }
         if (view !== null) {
             executeHandlerForPaste(process.action_intent, result).then((feedback) => {
                 console.log("123", feedback); // This will log "Event successfully fired"

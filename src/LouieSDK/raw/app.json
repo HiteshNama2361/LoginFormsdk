@@ -687,15 +687,41 @@
       "help_command": "Please say confirm or modify education?"
     },
     "process_modify_education": {
+      "spoken_feedback": "do you want to add some more education fields or want to remove selected education fields",
+      "is_question": true,
+      "action_intent": "process_modify_education",
+      "answers":[
+        "add-process_add_education",
+        "aid-process_add_education",
+        "remove-process_remove_education",
+        "delete-process_remove_education"
+      ],
+      "error_next": "shut_down",
+      "help_command": "would you like to add or remove fields"
+    },
+    "process_add_education": {
       "spoken_feedback": "please speak education fields again which would you like to add",
       "is_question": true,
       "action_id": 3,
-      "action_intent": "process_modify_education",
+      "action_intent": "process_add_education",
+      "education_intent": "add",
       "node_to_process": "education",
       "node_value_type": "id",
       "next": "process_confirm_education",
       "error_next": "shut_down",
-      "help_command": "please repeat modified education fields"
+      "help_command": "please repeat education fields which would you like to add"
+    },
+    "process_remove_education": {
+      "spoken_feedback": "please speak education fields again which would you like to remove",
+      "is_question": true,
+      "action_id": 3,
+      "action_intent": "process_remove_education",
+      "education_intent": "remove",
+      "node_to_process": "education",
+      "node_value_type": "id",
+      "next": "process_confirm_education",
+      "error_next": "shut_down",
+      "help_command": "please repeat education fields which would you like to remove"
     },
 
 

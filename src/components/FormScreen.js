@@ -166,14 +166,21 @@ const Form = () => {
       setMarital(result);
       scrollToField('marital');
       createAndUpdateRootWindow(action);
-    }else if(action === 'process_ask_education' || action === 'process_modify_education'){
-      console.log("3333","2121");
+    }else if(action === 'process_ask_education' || action === 'process_add_education' || action === 'process_remove_education'){
       console.log("inside setting education",result);
-      setEducation((prevEducation) => {
-        // Create a new set by merging previous education and new matchedKeys
-        const updatedEducation = [...new Set([...prevEducation, ...result])];
-        return updatedEducation;
-      });
+      if(action === 'process_remove_education'){
+        setEducation((prevEducation) => {
+          // Filter out items in result from prevEducation
+          const updatedEducation = prevEducation.filter((item) => !result.includes(item));
+          return updatedEducation;
+        });
+      }else{
+        setEducation((prevEducation) => {
+          // Create a new set by merging previous education and new matchedKeys
+          const updatedEducation = [...new Set([...prevEducation, ...result])];
+          return updatedEducation;
+        });
+      }
       console.log("inside setting education",education);
       scrollToField('education');
       createAndUpdateRootWindow(action);
