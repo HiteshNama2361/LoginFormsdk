@@ -23,7 +23,7 @@
       "id_types": [
       "id"
       ],
-      "primary_command": "process_dashboard_user_details",
+      "primary_command": "process_speak_user_details",
       "restricted_words": [
 
       ],
@@ -1012,7 +1012,7 @@
     },
 
     "process_ask_for_submit_or_modify_user_details": {
-      "spoken_feedback": "What would you like to modify first name last name? or submit yours details",
+      "spoken_feedback": "What would you like to modify name phone number or anything else ? or submit yours details",
       "is_question": true,
         "answers": [
           "submit-process_submit_user_details",
@@ -1045,7 +1045,7 @@
       ]
     },
     "process_submit_user_details":{
-        "spoken_feedback": "your's details submitted successfully!",
+        "spoken_feedback": "your details submitted successfully!",
         "action_intent": "process_submit_user_details",
         "action_id": 23
     },

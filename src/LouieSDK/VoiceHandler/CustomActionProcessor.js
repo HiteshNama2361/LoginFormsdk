@@ -264,10 +264,11 @@ export const handleProcess =  (process, commandId, context) => {
               console.log("nameOfuser ", nameOfuser);
               var dob = dataArray[1];
               var phone = dataArray[2];
+              phone = phone.split("").join(" ");
               // accountNo = accountNo.toString().slice('-4');
               // accountNo = CustomUtils.getDigitTextInReadableForm(accountNo);
               // console.log("a", accountNo);
-              var speakableText = "user details are as follows, name of the user  " + nameOfuser + " " + " contact number " + phone + " "+ "date of birth of the user" + " " + dob ;
+              var speakableText = "user details are as follows, name of the user  " + nameOfuser + " " + " contact number " + " " + phone + " "+ "date of birth of the user" + " " + dob ;
               console.log("speakableText", speakableText);
               FeedbackProcessor.speakToUser(speakableText, VOICE_NONE, true);
               VoiceEventProcessor.handleCommandByCommandId(process.next);
