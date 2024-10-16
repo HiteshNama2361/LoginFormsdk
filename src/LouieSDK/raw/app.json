@@ -23,7 +23,7 @@
       "id_types": [
       "id"
       ],
-      "primary_command": "process_speak_user_details",
+      "primary_command": "process_dashboard_user_details",
       "restricted_words": [
 
       ],
