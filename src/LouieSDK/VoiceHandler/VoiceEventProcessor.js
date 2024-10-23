@@ -241,7 +241,38 @@ export const dayMap = {
     "thirty-first": 31,
     "31st":31,
     "31":31
-  };
+};
+
+export const dropdowns = {
+    city: [
+      'mumbai', 'delhi', 'bangalore', 'hyderabad', 'ahmedabad', 'chennai', 
+      'kolkata', 'surat', 'pune', 'jaipur', 'lucknow', 'kanpur', 'nagpur', 
+      'indore', 'thane', 'bhopal', 'visakhapatnam', 'pimpri-chinchwad', 
+      'patna', 'vadodara', 'ghaziabad', 'ludhiana', 'agra', 'nashik', 
+      'faridabad', 'meerut', 'rajkot', 'kalyan-dombivli', 'vijayawada', 
+      'aurangabad', 'madurai', 'mysore', 'jammu', 'amritsar', 
+      'jabalpur', 'kota', 'dehradun', 'rourkela', 'cuttack', 'trichy', 
+      'salem', 'durgapur', 'siliguri', 'ranchi'
+    ],
+    state: [
+      'andhra pradesh', 'arunachal pradesh', 'assam', 'bihar', 'chhattisgarh', 
+      'goa', 'gujarat', 'haryana', 'himachal pradesh', 'jharkhand', 'karnataka', 
+      'kerala', 'madhya pradesh', 'maharashtra', 'manipur', 'meghalaya', 
+      'mizoram', 'nagaland', 'odisha', 'punjab', 'rajasthan', 'sikkim', 
+      'tamil nadu', 'telangana', 'tripura', 'uttar pradesh', 'uttarakhand', 
+      'west bengal'
+    ],
+    country: [
+      'india', 'usa', 'uk', 'canada', 'australia', 'germany', 'france', 
+      'italy', 'spain', 'china', 'japan', 'south korea', 'brazil', 
+      'mexico', 'south africa', 'nigeria', 'argentina', 'colombia', 
+      'chile', 'peru', 'sweden', 'norway', 'denmark', 'netherlands', 
+      'belgium', 'switzerland', 'austria', 'new zealand', 'singapore', 
+      'malaysia', 'thailand', 'philippines', 'indonesia', 'pakistan', 
+      'bangladesh', 'nepal', 'sri lanka', 'uae', 'saudi arabia', 'qatar', 
+      'kuwait', 'oman', 'bahrain'
+    ]
+};
 
 export const onVoiceEvent = async (results) => {
     WebSpeech.setIsListening(false);
@@ -470,7 +501,26 @@ export const handleCommandByCommandId = (commandId) => {
                         }
                     }
                     return;
-                } else if (process.action_id === CustomVoiceFlags.ENCOUNTERED_PROBLEM_GOING_SILENT ) {
+                }else if (process.action_id === CustomVoiceFlags.PROCESS_HANDLE_DROPDOWN_FIELD ) {
+                    console.log("inside handleCommandByCommandId", "19 ");
+                    // const dropdownBtn = document.getElementById('cityDropdownBtn');
+                    // if (dropdownBtn) {
+                    //     dropdownBtn.click();  // Trigger the custom dropdown click event
+                    // }
+                    FeedbackProcessor.speakToUser(process.spoken_feedback, VOICE_NONE, false);
+                    return;
+                }else if (process.action_id === CustomVoiceFlags.PROCESS_SET_FIELDS_EMPTY ) {
+                    console.log("inside handleCommandByCommandId", "1919 ");
+                    executeHandlerForPaste(process.action_intent, "submit", "submit").then((feedback) => {
+                        console.log("123", feedback); // This will log "Event successfully fired"
+                        //handleCommandByCommandId(process.next);
+                    })
+                    .catch((errorMessage) => {
+                        //  console.log("33.3", errorMessage); 
+                        handleCommandByCommandId(process.error_next); // This will log any error message
+                    });
+                    FeedbackProcessor.speakToUser(process.spoken_feedback, VOICE_END, false);
+                }else if (process.action_id === CustomVoiceFlags.ENCOUNTERED_PROBLEM_GOING_SILENT ) {
                     console.log("inside handleCommandByCommandId", "19 ");
                     FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
                 } else if (process.action_id === CustomVoiceFlags.PERFORM_GO_BACK ) {
@@ -516,7 +566,7 @@ export const handleCommandByCommandId = (commandId) => {
                     handleCommandWithDelay(process.next, process.delay_to_next);
                     return;
                 } else if (process.action_id === CustomVoiceFlags.PROCESS_SELECT_RADIO_BUTTON) {
-                    executeHandlerForPaste(process.action_intent, process.node_to_process).then((feedback) => {
+                    executeHandlerForPaste(process.action_intent, process.node_to_process,process.node_to_process).then((feedback) => {
                         console.log("123", feedback); // This will log "Event successfully fired"
                         //handleCommandByCommandId(process.next);
                     })
@@ -528,43 +578,6 @@ export const handleCommandByCommandId = (commandId) => {
                         console.log("inside VEP 34");
                         handleCommandByCommandId(process.next); 
                     }
-                    // // let context = LouieSDK.getCurrentActivity();
-                    // console.log("inside handleCommandByCommandId", "30");
-                    // if (context && process.node_to_process !== null && process.node_value_type === 'id') {
-                    //     console.log("inside handleCommandByCommandId", "31 " + process);
-                    //     let selectableNode = null;
-                    //     try {
-                    //         selectableNode = context.getElementById(process.node_to_process);                   
-                    //         if (selectableNode && selectableNode.checked !== null) {
-                    //             console.log("inside VEP 32", selectableNode);
-                    //             selectableNode.checked = true;
-                    //             if (process.spoken_feedback !== null) {
-                    //                 console.log("inside VEP 33", selectableNode);
-                    //                 FeedbackProcessor.speakToUser(process.spoken_feedback, VOICE_NONE, false);
-                    //             }
-                    //             if (process.next !== null) {
-                    //                 console.log("inside VEP 34", selectableNode);
-                    //                 handleCommandByCommandId(process.next); 
-                    //             }
-                    //         } else {
-                    //             FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
-                    //         }
-                    //     } catch (err) {
-                    //         console.log("Exception while click ", err);
-                    //     }
-                    //     FeedbackProcessor.flushSpeechOfFeedbackProcessor(VOICE_NONE," ");
-                    //     console.log("inside VEP handleCommandByCommandId 35", "35");
-                    // } else {
-                    //     console.log("inside handleCommandByCommandId", "32 " + process);
-                    //     if (process.error_next !== null) {
-                    //         console.log("inside handleCommandByCommandId", "33 " + process);
-                    //         handleCommandByCommandId(process.error_next);
-                    //     } else {
-                    //         console.log(TAG, "node_to_process is null and error_next is also null");
-                    //         FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
-                    //     }
-                    // }
-                    // return;
                 } else if (process.action_id === CustomVoiceFlags.PROCESS_CHECK_CHECKBOX) {
                     
                 } else if (process.action_id === CustomVoiceFlags.PROCESS_CLICK_BUTTON) {
@@ -682,11 +695,19 @@ export const handleVoiceError = (feedback) => {
             if (feedback && feedback.toString() !== null && (feedback.toString() === ConstantString.axios_error_code_504 || feedback.toString() === "Network Error" || feedback.toString() === "cancel axios post request after 3 seconds" || feedback.toString() === "canceled" || feedback.toString() === "Request failed with status code 502" || feedback.toString() === "timeout of 3000ms exceeded" || feedback.toString() === "Request failed with status code 504")) {
                ResourseUtils.noInternetError();
             } else if (errorCount >= 1 && errorCount <= 2) {
-                if (process !== null && process.help_command !== null && (errorCount === 1)) {
-                    FeedbackProcessor.speakToUser(process.help_command,VOICE_REINPUT,false);
-                } else {
-                    FeedbackProcessor.speakToUser(process.help_command_alternate,VOICE_REINPUT,false);
-                } 
+                if(process.is_question){
+                    if (process !== null && process.help_command !== null && (errorCount === 1)) {
+                        FeedbackProcessor.speakToUser(process.help_command,VOICE_REINPUT,false);
+                    } else {
+                        FeedbackProcessor.speakToUser(process.help_command_alternate,VOICE_REINPUT,false);
+                    }
+                } else{
+                    if (process !== null && process.help_command !== null && (errorCount === 1)) {
+                        FeedbackProcessor.speakToUser(process.help_command,VOICE_NONE,false);
+                    } else {
+                        FeedbackProcessor.speakToUser(process.help_command_alternate,VOICE_NONE,false);
+                    }
+                }
             } else {   
                 console.log("13","13");
                 FeedbackProcessor.speakToUser(ConstantString.sorry_i_did_not_get_you_going_silent, VOICE_END, false);
@@ -818,6 +839,258 @@ export const handleQuestionAnswer = (voiceResult) => {
     }
 };
 
+export const setFieldVoiceResults = async (field,value,flag) => {
+      console.log("inside set field voice resuls");
+      const process = CreateVoiceData.processMap.get(currentProcess);
+      var result=value;
+      result=result.toLowerCase();
+      var flag1=false;
+      if(field === 'name'){
+        result = result.charAt(0).toUpperCase() + result.slice(1);
+        FeedbackProcessor.speakToUser("okay "+result, VOICE_NONE, false);
+      }else if(field === 'phone'){
+        const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+        // let result = "one two double two triple five";
+        // Define replacements for numbers and patterns
+        const replacements = {
+        "\\bone\\b": "1",
+        "\\btwo\\b": "2",
+        "\\bthree\\b": "3",
+        "\\bfour\\b": "4",
+        "\\bfive\\b": "5",
+        "\\bsix\\b": "6",
+        "\\bseven\\b": "7",
+        "\\beight\\b": "8",
+        "\\bnine\\b": "9",
+        "\\bzero\\b": "0",
+        "\\bdouble (\\w+)\\b": (match, p1) => p1 + p1, // Matches "double <number word>"
+        "\\btriple (\\w+)\\b": (match, p1) => p1 + p1 + p1 // Matches "triple <number word>"
+        };
+        // Apply each replacement using regular expressions
+        console.log("before replacement of one with 1 etc",result);
+        for (const [pattern, replacement] of Object.entries(replacements)) {
+        result = result.replace(new RegExp(pattern, "gi"), replacement);
+        }
+        result = result?.replace(/ /g, '');
+        console.log("after replacement of one with 1 etc",result); // Outputs: "1 2 22 555"
+        if(phoneRegex.test(result) === false){
+            flag1=true;
+        }else{
+            var phone = result;
+            phone = phone.split("").join(" ");
+            FeedbackProcessor.speakToUser("Got it "+ phone, VOICE_NONE, false);
+        }
+      }else if(field === 'pin_code'){
+        const pinRegex = /^(\+\d{1,3}[- ]?)?\d{6}$/;
+        // let result = "one two double two triple five";
+        // Define replacements for numbers and patterns
+        const replacements = {
+        "\\bone\\b": "1",
+        "\\btwo\\b": "2",
+        "\\bthree\\b": "3",
+        "\\bfour\\b": "4",
+        "\\bfive\\b": "5",
+        "\\bsix\\b": "6",
+        "\\bseven\\b": "7",
+        "\\beight\\b": "8",
+        "\\bnine\\b": "9",
+        "\\bzero\\b": "0",
+        "\\bdouble (\\w+)\\b": (match, p1) => p1 + p1, // Matches "double <number word>"
+        "\\btriple (\\w+)\\b": (match, p1) => p1 + p1 + p1 // Matches "triple <number word>"
+        };
+        // Apply each replacement using regular expressions
+        console.log("before replacement of one with 1 etc",result);
+        for (const [pattern, replacement] of Object.entries(replacements)) {
+        result = result.replace(new RegExp(pattern, "gi"), replacement);
+        }
+        result = result?.replace(/ /g, '');
+        console.log("after replacement of one with 1 etc",result); // Outputs: "1 2 22 555"
+        if(pinRegex.test(result) === false){
+           flag1=true;
+        }else{
+            var pin = result;
+            pin = pin.split("").join(" ");
+            FeedbackProcessor.speakToUser("Alright "+ pin, VOICE_NONE, false);
+        }
+      }else if(field === 'email'){
+        result = CustomUtils.getEmailIdFromVoiceResult(result);
+        if(!result){
+            flag1=true;
+        }else{
+            result = result?.replace(/ /g, '');
+            var email = result;
+            FeedbackProcessor.speakToUser("your email id is "+ email, VOICE_NONE, false);
+        }
+      }else if(field === 'date_of_birth'){
+        console.log("handling date of birth format");
+        // console.log("view ", view);
+        var dateString = result;
+        result='-';
+        const dateFormats = [
+            /^\d{1,2}[-/]\d{1,2}[-/]\d{4}$/,           // e.g., 23/06/2001 or 23-06-2001
+            /^\d{1,2}(st|nd|rd|th)? \w+ \d{4}$/,       // e.g., 23rd June 2001 or 23 June 2001
+            /^\w+ \d{1,2}(st|nd|rd|th)? \d{4}$/,       // e.g., June 23rd 2001 or June 23 2001
+            /^\w+ of \w+ \d{4}$/,                      // e.g., "first of June 2023" or "second of May 2002"
+            /^\d{1,2} \d{1,2} \d{4}$/                  // e.g., "2 12 2002"
+        ];
+        const ordinalToNumber = {
+            first: '1', second: '2', third: '3', fourth: '4', fifth: '5',
+            sixth: '6', seventh: '7', eighth: '8', ninth: '9', tenth: '10',
+            eleventh: '11', twelfth: '12', thirteenth: '13', fourteenth: '14',
+            fifteenth: '15', sixteenth: '16', seventeenth: '17', eighteenth: '18',
+            nineteenth: '19', twentieth: '20', 'twenty-first': '21', 'twenty-second': '22',
+            'twenty-third': '23', 'twenty-fourth': '24', 'twenty-fifth': '25',
+            'twenty-sixth': '26', 'twenty-seventh': '27', 'twenty-eighth': '28',
+            'twenty-ninth': '29', thirtieth: '30', 'thirty-first': '31'
+        };
+        // Parse date in various formats
+        for (const format of dateFormats) {
+            if (format.test(dateString)) {
+                let date;
+                
+                // Handle dd-mm-yyyy or dd/mm/yyyy formats
+                if (dateString.includes('-') || dateString.includes('/')) {
+                    const [day, month, year] = dateString.split(/[-/]/);
+                    date = new Date(`${year}-${month}-${day.replace(/(st|nd|rd|th)$/i, '')}`);
+                } else {
+                    // Replace ordinal words with numbers (e.g., "first" -> "1")
+                    let cleanedDateString = dateString.toLowerCase()
+                        .replace(/\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth|twenty-first|twenty-second|twenty-third|twenty-fourth|twenty-fifth|twenty-sixth|twenty-seventh|twenty-eighth|twenty-ninth|thirtieth|thirty-first)\b/gi, 
+                            match => ordinalToNumber[match])
+                        .replace(/(\d{1,2})(st|nd|rd|th)/gi, '$1') // Remove suffixes
+                        .replace(/of /g, '')                      // Remove "of"
+                        .replace(/\s+/g, ' ')                     // Normalize spaces
+                        .trim();
+        
+                    date = new Date(cleanedDateString);
+                }
+                
+                if (!isNaN(date)) {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    result = `${year}-${month}-${day}`;
+                    break;
+                }
+            }
+        }
+        if(result==='-'){
+            flag1=true;
+            // FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
+        }else{
+            var dob = result;
+            FeedbackProcessor.speakToUser("Understood! "+ dob, VOICE_NONE, false);
+        }
+        console.log("result ", result);
+      }else if(field === 'gender'){
+        result = result?.replace(/ /g, '');
+        result = result?.replace(/,/g,'');
+        result = result?.replace(/-/g,'');
+        let gender = "unknown";  // Default value
+        // Check for "female"
+        for (let femaleWord of matchWordsJson.match_words.female) {
+            if (result.includes(femaleWord)) {
+            gender = "female";
+            break;
+            }
+        }
+        if (gender === "unknown") {
+            for (let maleWord of matchWordsJson.match_words.male) {
+                if (result.includes(maleWord)) {
+                    gender = "male";
+                    break;
+                }
+            }
+        }
+        // If neither "male" nor "female" found, check for "other"
+        if (gender === "unknown") {
+            gender = 'other';
+        }
+        result = gender;
+      }else if(field === 'city'){
+        result = result?.replace(/ /g, '');
+        if(!dropdowns.city.includes(result)){
+           flag1=true; 
+        }
+      }else if(field === 'education'){
+        const resultArray = [];
+        // Normalize the input string (convert to lowercase and replace special characters)
+        const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
+        const matchWords = matchWordsJson.match_words.education;
+        // First, check for multi-word matches (like "post graduate")
+        for (const key in matchWords) {
+            const wordVariants = matchWords[key];
+            // Detect multi-word match in `normalizedStr`
+            const multiWordMatch = wordVariants.some(variant => normalizedStr.includes(variant) && variant.includes(" "));
+            if (multiWordMatch) {
+                if (!resultArray.includes(key)) {
+                    resultArray.push(key);
+                }
+            }
+        }
+        // Now check for single-word matches
+        const words = normalizedStr.split(/\s+/); // Split by spaces
+        for (const key in matchWords) {
+            const wordVariants = matchWords[key];
+            for (let i = 0; i < words.length; i++) {
+                let word = words[i];
+                // Check for "Graduate" without "Post" immediately before it
+                if (key === "Graduate" && word === "graduate") {
+                    if (i > 0 && words[i - 1] === "post") {
+                        continue; // Skip if "graduate" is preceded by "post"
+                    }
+                }
+                // Add to resultArray if there's a match and it's not already included
+                if (wordVariants.includes(word) && !resultArray.includes(key)) {
+                    resultArray.push(key);
+                }
+            }
+        }
+        console.log(resultArray);
+        if(resultArray.length!==0){
+            result=resultArray;
+            FeedbackProcessor.speakToUser("okay! ", VOICE_NONE, false);
+        }else{
+            flag1 = true;
+        }
+      }
+    console.log("result ", result);
+    
+    if(flag1){
+        if(flag){
+            handleCommandByCommandId(process.change_field[field]);
+        }else{
+            handleVoiceError();
+        }
+    }else{
+        if (flag === false) {
+            executeHandlerForPaste(process.action_intent, result, field).then((feedback) => {
+                console.log("123", feedback); // This will log "Event successfully fired"
+                // handleCommandByCommandId(process.next);
+            })
+            .catch((errorMessage) => {
+                //  console.log("33.3", errorMessage); 
+                console.log("unsuccessfully set 2",field);
+                handleCommandByCommandId(process.error_next); // This will log any error message
+            });  
+        } else {
+            console.log(`inside going to set change ${field} to ${result}`);
+            console.log("the process gonna be execute is ",process.change_field);
+            console.log("the process gonna be execute is ",process.change_field[field] );
+            executeHandlerForPaste(process.change_field[field], result, field).then((feedback) => {
+                console.log("123", feedback);
+                console.log("successfully set",field); // This will log "Event successfully fired"
+                // handleCommandByCommandId(process.next);
+            })
+            .catch((errorMessage) => {
+                //  console.log("33.3", errorMessage); 
+                console.log("unsuccessfully set 1",field);
+                handleCommandByCommandId(process.error_next); // This will log any error message
+            }); 
+        }
+    }
+}
+
 export const handleCommandByPhrase = async (result) => {
     console.log("inside handleCommandByPhrase");
     const screenDetails = ContextFinder.getScreenDetails();
@@ -854,132 +1127,89 @@ export const handleCommandByPhrase = async (result) => {
         console.log("view ", view);
         var result = voiceResult;
         result.replace(/,/g,'');
-        if(process.node_to_process === 'email'){
-            console.log("ye hi to dikkat de rha",result);
-            result = CustomUtils.getEmailIdFromVoiceResult(result);
-            if(!result){
-                handleVoiceError();
-                return;
+        const inputStr = result.toLowerCase();
+        // Regular expression for capturing action (change, modify, edit)
+        // const actionRegex = /\b(change|modify|edit)\b/;
+        // // Regular expression for capturing the field (name, email, etc.)
+        // const fieldRegex = /\b(name|email|dateofbirth|etc)\b/;
+        // // Regular expression for capturing the value after 'to'
+        // const valueRegex = /\bto\s+(.+)/;
+
+        // let actionMatch = inputStr.match(actionRegex);
+        // let fieldMatch = inputStr.match(fieldRegex);
+        // let valueMatch = inputStr.match(valueRegex);
+
+        // let action = actionMatch ? actionMatch[0] : null; // Contains 'change', 'modify', or 'edit'
+        // let field = fieldMatch ? fieldMatch[0] : null; // Contains 'name', 'email', 'dateofbirth', etc.
+        // let value = valueMatch ? valueMatch[1] : null; // Contains value after 'to', e.g., 'xyz'
+
+        // // Output results
+        // // action='change';
+        // // field='name';
+        // // value='hitesh';
+        // console.log("Action: ", action);  // e.g., 'change'
+        // console.log("Field: ", field);    // e.g., 'name'
+        // console.log("Value: ", value);    // e.g., 'xyz'
+        const actionRegex = /\b(change|modify|edit)\b/;
+        const valueRegex = /(?:is|to)\s+(.+)$/;  // Captures value after 'is' or 'to'
+
+        // Find the action
+        let actionMatch = inputStr.match(actionRegex);
+        let action = actionMatch ? actionMatch[0] : null; // Contains 'change', 'modify', or 'edit'
+
+        // Helper function to find the field from id_info JSON and value immediately after
+        const findFieldAndValueFromInput = (input, id_info) => {
+        for (let key in id_info) {
+            for (let synonym of id_info[key]) {
+            const fieldRegex = new RegExp(`\\b${synonym}\\b`, 'i');  // Look for field synonym
+            const match = input.match(fieldRegex);
+            if (match) {
+                let remainingStr = input.slice(match.index + match[0].length).trim();
+                // First try to extract value after 'is' or 'to'
+                const valueAfterToIsMatch = remainingStr.match(valueRegex);
+                if (valueAfterToIsMatch) {
+                return { field: key, value: valueAfterToIsMatch[1].trim() }; // Return value after 'is' or 'to'
+                }
+                // Otherwise, treat remaining part after field as the value
+                return { field: key, value: remainingStr }; 
             }
-        }else if(process.node_to_process === 'education'){
-            // const resultArray = [];
-            //             // Normalize the input string (convert to lowercase and replace special characters)
-            // const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
-            // const matchWords = matchWordsJson.match_words;
-
-            // // Split the normalized string into words
-            // const words = normalizedStr.split(/\s+/); // Split by spaces
-            
-            // // Iterate through each key in the matchWords object
-            // for (const key in matchWords) {
-            //     const wordVariants = matchWords[key];
-            //     for (let word of words) {
-            //     const joinedWord = words.join(" ");
-            //     if (wordVariants.some(variant => variant === word || joinedWord.includes(variant))) {
-            //         if (!resultArray.includes(key)) {
-            //         resultArray.push(key);
-            //         }
-            //     }
-            //     }
-            // }
-            const resultArray = [];
-// Normalize the input string (convert to lowercase and replace special characters)
-const normalizedStr = result.toLowerCase().replace(/[,/&]/g, ' ');
-const matchWords = matchWordsJson.match_words;
-
-// First, check for multi-word matches (like "post graduate")
-for (const key in matchWords) {
-    const wordVariants = matchWords[key];
-
-    // Detect multi-word match in `normalizedStr`
-    const multiWordMatch = wordVariants.some(variant => normalizedStr.includes(variant) && variant.includes(" "));
-    if (multiWordMatch) {
-        if (!resultArray.includes(key)) {
-            resultArray.push(key);
-        }
-    }
-}
-
-// Now check for single-word matches
-const words = normalizedStr.split(/\s+/); // Split by spaces
-for (const key in matchWords) {
-    const wordVariants = matchWords[key];
-
-    for (let i = 0; i < words.length; i++) {
-        let word = words[i];
-
-        // Check for "Graduate" without "Post" immediately before it
-        if (key === "Graduate" && word === "graduate") {
-            if (i > 0 && words[i - 1] === "post") {
-                continue; // Skip if "graduate" is preceded by "post"
             }
         }
+        return { field: null, value: null }; // Return null if no match is found
+        };
 
-        // Add to resultArray if there's a match and it's not already included
-        if (wordVariants.includes(word) && !resultArray.includes(key)) {
-            resultArray.push(key);
+        // Find the field and value directly after the field
+        let { field, value } = findFieldAndValueFromInput(inputStr, matchWordsJson.match_words.id_info);
+
+        // If no value found directly after the field, check for value after "is" or "to"
+        if (!value) {
+           let valueMatch = inputStr.match(valueRegex);
+           value = valueMatch ? valueMatch[1].trim() : null; // Contains the value after 'is' or 'to'
         }
-    }
-}
 
-console.log(resultArray);
+        // If action is not found, we check for patterns like "my name is X" or "my dob X" where 'is' or 'to' is missing
+        // if (!action && field && value) {
+        //    action = "update";  // Default action when only field and value are found
+        // }
 
-            if(resultArray.length!==0){
-                result=resultArray;
+        console.log("Action:", action);
+        console.log("Field:", field);
+        console.log("Value:", value);
+        if(!action&&!value){
+            value=result;
+        }
+        if(action){
+           if(field){
+            if(value){   
+                setFieldVoiceResults(field,value,true);
             }else{
-                console.log("length is zero");
-                handleVoiceError();
-                return;
+                handleCommandByCommandId(process.change_field[field]);
             }
-        }
-        if(process.node_to_process === 'phone' || process.node_to_process === 'pin'){
-            const phoneRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
-            const pinRegex = /^(\+\d{1,3}[- ]?)?\d{6}$/;
-            // let result = "one two double two triple five";
-            // Define replacements for numbers and patterns
-            const replacements = {
-            "\\bone\\b": "1",
-            "\\btwo\\b": "2",
-            "\\bthree\\b": "3",
-            "\\bfour\\b": "4",
-            "\\bfive\\b": "5",
-            "\\bsix\\b": "6",
-            "\\bseven\\b": "7",
-            "\\beight\\b": "8",
-            "\\bnine\\b": "9",
-            "\\bzero\\b": "0",
-            "\\bdouble (\\w+)\\b": (match, p1) => p1 + p1, // Matches "double <number word>"
-            "\\btriple (\\w+)\\b": (match, p1) => p1 + p1 + p1 // Matches "triple <number word>"
-            };
-
-            // Apply each replacement using regular expressions
-            console.log("before replacement of one with 1 etc",result);
-            for (const [pattern, replacement] of Object.entries(replacements)) {
-            result = result.replace(new RegExp(pattern, "gi"), replacement);
-            }
-            result = result?.replace(/ /g, '');
-            console.log("after replacement of one with 1 etc",result); // Outputs: "1 2 22 555"
-            if(process.node_to_process === 'phone' && phoneRegex.test(result) === false || process.node_to_process === 'pin' && pinRegex.test(result) === false){
-                handleVoiceError();
-                return;
-            }
-        }
-        if(process.node_to_process!='first-name'&& process.node_to_process!='education'){
-            result = result?.replace(/ /g, '');
-        }
-        
-        console.log("result ", result);
-        if (view !== null) {
-            executeHandlerForPaste(process.action_intent, result).then((feedback) => {
-                console.log("123", feedback); // This will log "Event successfully fired"
-                // handleCommandByCommandId(process.next);
-            })
-            .catch((errorMessage) => {
-                //  console.log("33.3", errorMessage); 
-                handleCommandByCommandId(process.error_next); // This will log any error message
-            });  
-        } else {
-            FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
+           }else{
+            handleCommandByCommandId("process_ask_field_to_modify");
+           }
+        }else{
+            setFieldVoiceResults(process.node_to_process,value,false);  
         }
     }else if (process.action_id == CustomVoiceFlags.PROCESS_SET_DATE_OF_BIRTH) {
         const view = ViewParser.getViewById(LouieSDK.currentScreenContext, process.node_to_process);
@@ -987,36 +1217,58 @@ console.log(resultArray);
         var dateString = voiceResult;
         var result='-';
         const dateFormats = [
-            /^\d{1,2}[-/]\d{1,2}[-/]\d{4}$/,     // e.g., 23/06/2001 or 23-06-2001
-            /^\d{1,2}(st|nd|rd|th)? \w+ \d{4}$/,  // e.g., 23rd June 2001 or 23 June 2001
-            /^\w+ \d{1,2}(st|nd|rd|th)? \d{4}$/,  // e.g., June 23rd 2001 or June 23 2001
+            /^\d{1,2}[-/]\d{1,2}[-/]\d{4}$/,           // e.g., 23/06/2001 or 23-06-2001
+            /^\d{1,2}(st|nd|rd|th)? \w+ \d{4}$/,       // e.g., 23rd June 2001 or 23 June 2001
+            /^\w+ \d{1,2}(st|nd|rd|th)? \d{4}$/,       // e.g., June 23rd 2001 or June 23 2001
+            /^\w+ of \w+ \d{4}$/,                      // e.g., "first of June 2023" or "second of May 2002"
+            /^\d{1,2} \d{1,2} \d{4}$/                  // e.g., "2 12 2002"
         ];
+        
+        const ordinalToNumber = {
+            first: '1', second: '2', third: '3', fourth: '4', fifth: '5',
+            sixth: '6', seventh: '7', eighth: '8', ninth: '9', tenth: '10',
+            eleventh: '11', twelfth: '12', thirteenth: '13', fourteenth: '14',
+            fifteenth: '15', sixteenth: '16', seventeenth: '17', eighteenth: '18',
+            nineteenth: '19', twentieth: '20', 'twenty-first': '21', 'twenty-second': '22',
+            'twenty-third': '23', 'twenty-fourth': '24', 'twenty-fifth': '25',
+            'twenty-sixth': '26', 'twenty-seventh': '27', 'twenty-eighth': '28',
+            'twenty-ninth': '29', thirtieth: '30', 'thirty-first': '31'
+        };
+        
         // Parse date in various formats
         for (const format of dateFormats) {
             if (format.test(dateString)) {
                 let date;
+                
+                // Handle dd-mm-yyyy or dd/mm/yyyy formats
                 if (dateString.includes('-') || dateString.includes('/')) {
                     const [day, month, year] = dateString.split(/[-/]/);
                     date = new Date(`${year}-${month}-${day.replace(/(st|nd|rd|th)$/i, '')}`);
                 } else {
-                    // Handle formats like "23rd June 2001" or "June 23rd 2001"
-                    let cleanedDateString = dateString
-                        .replace(/(\d{1,2})(st|nd|rd|th)/gi, '$1') // Remove ordinal suffixes
-                        .replace(/\s+/g, ' ') // Normalize spaces
+                    // Replace ordinal words with numbers (e.g., "first" -> "1")
+                    let cleanedDateString = dateString.toLowerCase()
+                        .replace(/\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth|twenty-first|twenty-second|twenty-third|twenty-fourth|twenty-fifth|twenty-sixth|twenty-seventh|twenty-eighth|twenty-ninth|thirtieth|thirty-first)\b/gi, 
+                            match => ordinalToNumber[match])
+                        .replace(/(\d{1,2})(st|nd|rd|th)/gi, '$1') // Remove suffixes
+                        .replace(/of /g, '')                      // Remove "of"
+                        .replace(/\s+/g, ' ')                     // Normalize spaces
                         .trim();
+        
                     date = new Date(cleanedDateString);
                 }
+                
                 if (!isNaN(date)) {
                     const year = date.getFullYear();
                     const month = String(date.getMonth() + 1).padStart(2, '0');
                     const day = String(date.getDate()).padStart(2, '0');
-                    result =`${year}-${month}-${day}`;
+                    result = `${year}-${month}-${day}`;
                     break;
                 }
             }
         }
+        
         if (view !== null && result !=='-') {
-            executeHandlerForPaste(process.action_intent, result).then((feedback) => {
+            executeHandlerForPaste(process.action_intent, result,process.node_to_process).then((feedback) => {
                 console.log("123", feedback); // This will log "Event successfully fired"
                 //handleCommandByCommandId(process.next);
             })

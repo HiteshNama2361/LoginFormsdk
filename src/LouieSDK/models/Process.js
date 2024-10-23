@@ -3,6 +3,7 @@ const jsonData = data;
 
 class Process {
   constructor(data) {
+  this.change_field = data.change_field || null;
   this.action_intent = data.action_intent || null;
   this.is_explore_by_touch = data.is_explore_by_touch || false;
   this.node_to_process = data.node_to_process || null;

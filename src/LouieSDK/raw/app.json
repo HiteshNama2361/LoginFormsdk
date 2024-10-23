@@ -4,10 +4,16 @@
       "name": "screen_0",
       "screen_number": 0,
       "screen_type": "activity",
-      "details": [""],
-      "id_types": ["id"],
+      "details": [
+        ""
+      ],
+      "id_types": [
+        "id"
+      ],
       "primary_command": "process_check_for_no_screen_found",
-      "restricted_words": ["shut,up"],
+      "restricted_words": [
+        "shut,up"
+      ],
       "commands": {
         "go,back": "go_back"
       },
@@ -21,12 +27,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
-      "primary_command": "process_dashboard_user_details",
-      "restricted_words": [
-
-      ],
+      "primary_command": "process_user_details_form_filling",
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -45,12 +49,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
       "primary_command": "process_check_payee_name_found_globally",
-      "restricted_words": [
-
-      ],
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -69,12 +71,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
       "primary_command": "process_speak_payee_item_details",
-      "restricted_words": [
-
-      ],
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -93,12 +93,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
       "primary_command": "process_select_otp_confirmation",
-      "restricted_words": [
-
-      ],
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -117,12 +115,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
       "primary_command": "process_ask_payee_name_from_list",
-      "restricted_words": [
-
-      ],
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -141,12 +137,10 @@
         ""
       ],
       "id_types": [
-      "id"
+        "id"
       ],
       "primary_command": "process_summary_transaction_successfull",
-      "restricted_words": [
-
-      ],
+      "restricted_words": [],
       "commands": {
         "exit": "perform_go_back",
         "quit": "perform_go_back",
@@ -159,909 +153,253 @@
     }
   },
   "processes": {
-
-   "process_dashboard_user_details": {
-      "spoken_feedback": "Welcome to Louie Voice! Now, you can fill your login details, with just voice commands!",
+    "process_user_details_form_filling": {
+      "spoken_feedback": "Let's start filling the form!",
       "action_id": 26,
-      "action_intent": "process_dashboard_user_details",
-      "next": "process_ask_first_name"
+      "action_intent": "process_user_details_form_filling",
+      "next": "process_find_next_empty_field"
     },
-    "process_ask_first_name": {
-      "spoken_feedback": "Please speak your name",
+    "process_find_next_empty_field": {
+      "action_id": 6,
+      "action_intent": "process_find_next_empty_field",
+      "is_custom_action": true,
+      "next": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education",
+        "submit_or_modify": "process_ask_modify_or_submit"
+      }
+    },
+    "process_ask_name": {
+      "spoken_feedback": "please speak your full name",
       "is_question": true,
+      "node_to_process": "name",
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
       "action_id": 3,
-      "action_intent": "process_ask_first_name",
-      "node_to_process": "first-name",
+      "action_intent": "process_ask_name",
       "node_value_type": "id",
-      "next":"process_confirm_first_name",
       "error_next": "shut_down",
-      "help_command": "speak your  name",
-      "help_command_alternate": "Please speak your name"
+      "help_command": "what is your full name?",
+      "help_command_alternate": "Please speak your full name"
     },
-    "process_confirm_first_name": {
-      "spoken_feedback": "Please say confirm or modify name ?",
+    "process_ask_phone_no": {
+      "spoken_feedback": "now,tell me your phone number.",
       "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_phone",
-        "gun,form-process_ask_phone",
-        "gun,foam-process_ask_phone",
-        "gun,forum-process_ask_phone",
-        "gun,fom-process_ask_phone",
-        "gun,formed-process_ask_phone",
-        "confirm,name-process_ask_phone",
-        "proceed-process_ask_phone",
-        "confirm-process_ask_phone",
-        "yes,confirm-process_ask_phone",
-        "yes,please-process_ask_phone",
-        "good,to,go-process_ask_phone",
-        "go,ahead-process_ask_phone",
-        "ahead-process_ask_phone",
-        "yes,yes-process_ask_phone",
-        "yess-process_ask_phone",
-        "yes-process_ask_phone",
-        "sure-process_ask_phone",
-        "of,course-process_ask_phone",
-        "proceed-process_ask_phone",
-        "modified-process_modify_first_name",
-        "modify,first,name-process_modify_first_name",
-        "modify-process_modify_first_name",
-        "changed-process_modify_first_name",
-        "change-process_modify_first_name",
-        "edit-process_modify_first_name",
-        "add,it-process_modify_first_name",
-        "edit,details-process_modify_first_name"
-      ],
-      "help_command": "Please say confirm or modify your name ?"
-    },
-    "process_modify_first_name": {
-      "spoken_feedback": "speak modified name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_first_name",
-      "node_to_process": "first-name",
-      "node_value_type": "id",
-      "next": "process_confirm_first_name",
-      "error_next": "shut_down",
-      "help_command": "please speak modified name",
-      "help_command_alternate": "Please speak your name"
-    },
-
-    "process_ask_phone": {
-      "spoken_feedback": "Please speak your 10 digit phone number",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_ask_phone",
       "node_to_process": "phone",
-      "node_value_type": "id",
-      "next":"process_confirm_phone",
-      "error_next": "shut_down",
-      "help_command": "speak your valid contact details",
-      "help_command_alternate": "Please speak your valid phone number"
-    },
-    "process_confirm_phone": {
-      "spoken_feedback": "Please say confirm or modify phone number ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_pin_code",
-        "gun,form-process_ask_pin_code",
-        "gun,foam-process_ask_pin_code",
-        "gun,forum-process_ask_pin_code",
-        "gun,fom-process_ask_pin_code",
-        "gun,formed-process_ask_pin_code",
-        "confirm,phone,number-process_ask_pin_code",
-        "proceed-process_ask_pin_code",
-        "confirm-process_ask_pin_code",
-        "yes,confirm-process_ask_pin_code",
-        "yes,please-process_ask_pin_code",
-        "good,to,go-process_ask_pin_code",
-        "go,ahead-process_ask_pin_code",
-        "ahead-process_ask_pin_code",
-        "yes,yes-process_ask_pin_code",
-        "yess-process_ask_pin_code",
-        "yes-process_ask_pin_code",
-        "sure-process_ask_pin_code",
-        "of,course-process_ask_pin_code",
-        "proceed-process_ask_pin_code",
-        "modified-process_modify_phone",
-        "modify,phone,number-process_modify_phone",
-        "modify-process_modify_phone",
-        "changed-process_modify_phone",
-        "change-process_modify_phone",
-        "edit-process_modify_phone",
-        "add,it-process_modify_phone",
-        "edit,details-process_modify_phone"
-      ],
-      "help_command": "Please say confirm or modify phone number ?"
-    },
-    "process_modify_phone": {
-      "spoken_feedback": "speak modified phone number",
-      "is_question": true,
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
       "action_id": 3,
-      "action_intent": "process_modify_phone",
-      "node_to_process": "phone",
+      "action_intent": "process_ask_phone_no",
       "node_value_type": "id",
-      "next": "process_confirm_phone",
       "error_next": "shut_down",
-      "help_command": "please speak modified 10 digit valid phone number",
-      "help_command_alternate": "Please speak your valid phone number"
+      "help_command": "Speak your 10-digit phone number",
+      "help_command_alternate": "what is your phone number?"
     },
-
     "process_ask_pin_code": {
-      "spoken_feedback": "Please speak 6 digit Pin-code",
+      "spoken_feedback": "What is the PIN code of your area?",
       "is_question": true,
+      "node_to_process": "pin_code",
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
       "action_id": 3,
       "action_intent": "process_ask_pin_code",
-      "node_to_process": "pin",
       "node_value_type": "id",
-      "next":"process_confirm_pin_code",
       "error_next": "shut_down",
-      "help_command": "speak your valid pin code",
-      "help_command_alternate": "Please speak your 6 digit valid pin code"
+      "help_command": " Simply speak your 6 digit pin code",
+      "help_command_alternate": " What is the PIN code of your area?"
     },
-    "process_confirm_pin_code": {
-      "spoken_feedback": "Please say confirm or modify pin-code ?",
+    "process_ask_email_address": {
+      "spoken_feedback": "Please your your Email ID.",
       "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_email",
-        "gun,form-process_ask_email",
-        "gun,forum-process_ask_email",
-        "gun,foam-process_ask_email",
-        "gun,fom-process_ask_email",
-        "gun,formed-process_ask_email",
-        "confirm,pin,code-process_ask_email",
-        "proceed-process_ask_email",
-        "confirm-process_ask_email",
-        "yes,confirm-process_ask_email",
-        "yes,please-process_ask_email",
-        "good,to,go-process_ask_email",
-        "go,ahead-process_ask_email",
-        "ahead-process_ask_email",
-        "yes,yes-process_ask_email",
-        "yess-process_ask_email",
-        "yes-process_ask_email",
-        "sure-process_ask_email",
-        "of,course-process_ask_email",
-        "proceed-process_ask_email",
-        "modified-process_modify_pin_code",
-        "modify,pin,code-process_modify_pin_code",
-        "modify-process_modify_pin_code",
-        "changed-process_modify_pin_code",
-        "change-process_modify_pin_code",
-        "edit-process_modify_pin_code",
-        "add,it-process_modify_pin_code",
-        "edit,details-process_modify_pin_code"
-      ],
-      "help_command": "Please say confirm or modify pin code ?"
-    },
-    "process_modify_pin_code": {
-      "spoken_feedback": "speak modified 6 digit valid pin-code",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_pin_code",
-      "node_to_process": "pin",
-      "node_value_type": "id",
-      "next": "process_confirm_pin_code",
-      "error_next": "shut_down",
-      "help_command": "please speak modified 6 digit valid pin-code",
-      "help_command_alternate": "Please speak your valid 6 digit pin code"
-    },
-
-    "process_ask_email": {
-      "spoken_feedback": "Please speak the email",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_ask_email",
       "node_to_process": "email",
-      "node_value_type": "id",
-      "next":"process_confirm_email",
-      "error_next": "shut_down",
-      "help_command": "speak your valid email",
-      "help_command_alternate": "Please speak your email address"
-    },
-    "process_confirm_email": {
-      "spoken_feedback": "Please say confirm or modify your email ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_date_of_birth",
-        "gun,form-process_ask_date_of_birth",
-        "gun,foam-process_ask_date_of_birth",
-        "gun,forum-process_ask_date_of_birth",
-        "gun,fom-process_ask_date_of_birth",
-        "gun,formed-process_ask_date_of_birth",
-        "confirm,email-process_ask_date_of_birth",
-        "proceed-process_ask_date_of_birth",
-        "confirm-process_ask_date_of_birth",
-        "yes,confirm-process_ask_date_of_birth",
-        "yes,please-process_ask_date_of_birth",
-        "good,to,go-process_ask_date_of_birth",
-        "go,ahead-process_ask_date_of_birth",
-        "ahead-process_ask_date_of_birth",
-        "yes,yes-process_ask_date_of_birth",
-        "yess-process_ask_date_of_birth",
-        "yes-process_ask_date_of_birth",
-        "sure-process_ask_date_of_birth",
-        "of,course-process_ask_date_of_birth",
-        "proceed-process_ask_date_of_birth",
-        "modified-process_modify_email",
-        "modify,email-process_modify_email",
-        "modify-process_modify_email",
-        "changed-process_modify_email",
-        "change-process_modify_email",
-        "edit-process_modify_email",
-        "add,it-process_modify_email",
-        "edit,details-process_modify_email"
-      ],
-      "help_command": "Please say confirm or modify email ?"
-    },
-    "process_modify_email": {
-      "spoken_feedback": "speak modified email",
-      "is_question": true,
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
       "action_id": 3,
-      "action_intent": "process_modify_email",
-      "node_to_process": "email",
+      "action_intent": "process_ask_email_address",
       "node_value_type": "id",
-      "next": "process_confirm_email",
       "error_next": "shut_down",
-      "help_command": "please speak modified email",
-      "help_command_alternate": "Please speak your email address"
+      "help_command": "Speak your valid email address",
+      "help_command_alternate": "what is your email address?"
     },
-
     "process_ask_date_of_birth": {
-      "spoken_feedback": "Please speak your date of birth",
+      "spoken_feedback": " Speak your date of birth, in day month year format.",
       "is_question": true,
-      "action_id": 7,
+      "node_to_process": "date_of_birth",
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
+      "action_id": 3,
       "action_intent": "process_ask_date_of_birth",
-      "node_to_process": "date-of-birth",
       "node_value_type": "id",
-      "next":"process_confirm_date_of_birth",
       "error_next": "shut_down",
-      "help_command": "speak your valid date of birth",
-      "help_command_alternate": "Please speak your date of birth"
+      "help_command": " Please speak the date in, day month year format.",
+      "help_command_alternate": "What is your date of birth?"
     },
-    "process_confirm_date_of_birth": {
-      "spoken_feedback": "Please say confirm or modify your date of birth ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_gender",
-        "gun,form-process_ask_gender",
-        "gun,foam-process_ask_gender",
-        "gun,forum-process_ask_gender",
-        "gun,fom-process_ask_gender",
-        "gun,formed-process_ask_gender",
-        "confirm,date,of-process_ask_gender",
-        "proceed-process_ask_gender",
-        "confirm-process_ask_gender",
-        "yes,confirm-process_ask_gender",
-        "yes,please-process_ask_gender",
-        "good,to,go-process_ask_gender",
-        "go,ahead-process_ask_gender",
-        "ahead-process_ask_gender",
-        "yes,yes-process_ask_gender",
-        "yess-process_ask_gender",
-        "yes-process_ask_gender",
-        "sure-process_ask_gender",
-        "of,course-process_ask_gender",
-        "proceed-process_ask_gender",
-        "modified-process_modify_date_of_birth",
-        "modify,date,of,birth-process_modify_date_of_birth",
-        "modify-process_modify_date_of_birth",
-        "changed-process_modify_date_of_birth",
-        "change-process_modify_date_of_birth",
-        "edit-process_modify_date_of_birth",
-        "add,it-process_modify_date_of_birth",
-        "edit,details-process_modify_date_of_birth"
-      ],
-      "help_command": "Please say confirm or modify date of birth ?"
-    },
-    "process_modify_date_of_birth": {
-      "spoken_feedback": "speak modified date of birth",
-      "is_question": true,
-      "action_id": 7,
-      "action_intent": "process_modify_date_of_birth",
-      "node_to_process": "date-of-birth",
-      "node_value_type": "id",
-      "next": "process_confirm_date_of_birth",
-      "error_next": "shut_down",
-      "help_command": "please speak modified date of birth"
-    },
-
     "process_ask_gender": {
-      "spoken_feedback": "Please speak the gender",
+      "spoken_feedback": "Speak your gender, from Male, female, or other?",
       "is_question": true,
-      "action_intent": "process_ask_gender",
       "node_to_process": "gender",
-      "answers": [
-        "male-process_set_gender_male",
-        "mail-process_set_gender_male",
-        "m-process_set_gender_male",
-        "maile-process_set_gender_male",
-        "female-process_set_gender_female",
-        "femaile-process_set_gender_female",
-        "femail-process_set_gender_female",
-        "f-process_set_gender_female",
-        "other-process_set_gender_other",
-        "order-process_set_gender_other",
-        "ordered-process_set_gender_other",
-        "oder-process_set_gender_other"
-      ],
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
+      "action_id": 3,
+      "action_intent": "process_ask_gender",
+      "node_value_type": "id",
       "error_next": "shut_down",
-      "help_command": "speak your gender",
-      "help_command_alternate": "Please speak your gender"
+      "help_command": "Select your gender from: Male, Female, or Other.",
+      "help_command_alternate": "speak your gender."
     },
-    "process_set_gender_male": {
-       "action_id": 1001,
-       "next": "process_confirm_gender",
-       "node_to_process" :"male",
-       "action_intent": "process_set_gender"
-    },
-    "process_set_gender_female": {
-       "action_id": 1001,
-       "next": "process_confirm_gender",
-       "node_to_process" :"female",
-       "action_intent": "process_set_gender"
-    },
-    "process_set_gender_other": {
-       "action_id": 1001,
-       "next": "process_confirm_gender",
-       "node_to_process" :"other",
-       "action_intent": "process_set_gender"
-    },
-    "process_confirm_gender": {
-      "spoken_feedback": "Please say confirm or modify gender ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_city",
-        "gun,form-process_ask_city",
-        "gun,foam-process_ask_city",
-        "gun,forum-process_ask_city",
-        "gun,fom-process_ask_city",
-        "gun,formed-process_ask_city",
-        "confirm,gender-process_ask_city",
-        "proceed-process_ask_city",
-        "confirm-process_ask_city",
-        "yes,confirm-process_ask_city",
-        "yes,please-process_ask_city",
-        "good,to,go-process_ask_city",
-        "go,ahead-process_ask_city",
-        "ahead-process_ask_city",
-        "yes,yes-process_ask_city",
-        "yess-process_ask_city",
-        "yes-process_ask_city",
-        "sure-process_ask_city",
-        "of,course-process_ask_city",
-        "proceed-process_ask_city",
-        "modified-process_modify_gender",
-        "modify,gender-process_modify_gender",
-        "modify-process_modify_gender",
-        "changed-process_modify_gender",
-        "change-process_modify_gender",
-        "edit-process_modify_gender",
-        "add,it-process_modify_gender",
-        "edit,details-process_modify_gender"
-      ],
-      "help_command": "Please say confirm or modify gender ?"
-    },
-    "process_modify_gender": {
-      "spoken_feedback": "speak modified gender",
-      "is_question": true,
-      "action_intent": "process_modify_gender",
-      "answers": [
-        "male-process_set_gender_male",
-        "mail-process_set_gender_male",
-        "m-process_set_gender_male",
-        "maile-process_set_gender_male",
-        "female-process_set_gender_female",
-        "femaile-process_set_gender_female",
-        "femail-process_set_gender_female",
-        "f-process_set_gender_female",
-        "other-process_set_gender_other",
-        "order-process_set_gender_other",
-        "ordered-process_set_gender_other",
-        "oder-process_set_gender_other"
-      ],
-      "next": "process_confirm_gender",
-      "error_next": "shut_down",
-      "help_command": "please speak modified gender"
-    },
-
     "process_ask_city": {
-      "spoken_feedback": "Please speak your city name",
-      "is_question": true,
-      "action_id": 3,
+      "spoken_feedback": "please Select your city name from the list manually.",
+      "node_to_process": "city",
+      "next": "process_find_next_empty_field",
+      "action_id": 69,
       "action_intent": "process_ask_city",
-      "node_to_process": "city",
       "node_value_type": "id",
-      "next":"process_confirm_city",
-      "error_next": "shut_down",
-      "help_command": "speak your  valid city name from the list of city",
-      "help_command_alternate": "Please speak your city name"
+      "help_command": "please select your city from dropdown",
+      "help_command_alternate": "to proceed further please select your city from dropdown",
+      "error_next": "shut_down"
     },
-    "process_confirm_city": {
-      "spoken_feedback": "Please say confirm or modify city name ?",
+    "process_ask_education": {
+      "spoken_feedback": "What is your educational qualification?",
       "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_education",
-        "gun,form-process_ask_education",
-        "gun,foam-process_ask_education",
-        "gun,forum-process_ask_education",
-        "gun,fom-process_ask_education",
-        "gun,formed-process_ask_education",
-        "confirm,city,name-process_ask_education",
-        "proceed-process_ask_education",
-        "confirm-process_ask_education",
-        "yes,confirm-process_ask_education",
-        "yes,please-process_ask_education",
-        "good,to,go-process_ask_education",
-        "go,ahead-process_ask_education",
-        "ahead-process_ask_education",
-        "yes,yes-process_ask_education",
-        "yess-process_ask_education",
-        "yes-process_ask_education",
-        "sure-process_ask_education",
-        "of,course-process_ask_education",
-        "proceed-process_ask_education",
-        "modified-process_modify_city",
-        "modify,city,name-process_modify_city",
-        "modify-process_modify_city",
-        "changed-process_modify_city",
-        "change-process_modify_city",
-        "edit-process_modify_city",
-        "add,it-process_modify_city",
-        "edit,details-process_modify_city"
-      ],
-      "help_command": "Please say confirm or modify city name ?"
-    },
-    "process_modify_city": {
-      "spoken_feedback": "speak modified city name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_city",
-      "node_to_process": "city",
-      "node_value_type": "id",
-      "next": "process_confirm_city",
-      "error_next": "shut_down",
-      "help_command": "please speak modified city name"
-    },
-
-    "process_ask_education":{
-      "spoken_feedback": "Please speak your education fields",
-      "is_question": true,
+      "node_to_process": "education",
+      "next": "process_find_next_empty_field",
+      "change_field": {
+        "name": "process_ask_name",
+        "phone": "process_ask_phone_no",
+        "pin_code": "process_ask_pin_code",
+        "email": "process_ask_email_address",
+        "date_of_birth": "process_ask_date_of_birth",
+        "gender": "process_ask_gender",
+        "city": "process_ask_city",
+        "education": "process_ask_education"
+      },
       "action_id": 3,
       "action_intent": "process_ask_education",
-      "node_to_process": "education",
       "node_value_type": "id",
-      "next":"process_confirm_education",
       "error_next": "shut_down",
-      "help_command": "speak your education fields name",
-      "help_command_alternate": "Please speak your valid education from below options"
+      "help_command": "Select an option from: Graduate, Postgraduate, Doctorate, Diploma, High School, or, Professional Certification",
+      "help_command_alternate": "choose from: one; Graduate, two; Postgraduate, three; Doctorate, four;  Diploma, five; High School, or, six; Professional Certification"
     },
-    "process_confirm_education": {
-      "spoken_feedback": "Please say confirm or modify education ?",
+    "process_ask_modify_or_submit": {
+      "spoken_feedback": "If you are happy with the details you have filled, just say “confirm”, or modify.",
+      "is_question": true,
+      "answers": [
+        "modify-process_ask_field_to_modify",
+        "confirm-process_submit_user_details",
+        "submit-process_submit_user_details"
+      ],
+      "action_intent": "process_ask_modify_or_submit",
+      "help_command": "Simply say, confirm or modify",
+      "help_command_alternate": "If you are happy with the details you have filled, just say “confirm”, or modify."
+    },
+    "process_ask_field_to_modify": {
+      "spoken_feedback": "What would you like to modify name phone number or anything else ?",
       "is_question": true,
       "answers": [
         "submit-process_submit_user_details",
         "summit-process_submit_user_details",
-        "confirmed-process_speak_user_details",
-        "gun,form-process_speak_user_details",
-        "gun,foam-process_speak_user_details",
-        "gun,forum-process_speak_user_details",
-        "gun,fom-process_speak_user_details",
-        "gun,formed-process_speak_user_details",
-        "confirm,education-process_speak_user_details",
-        "proceed-process_speak_user_details",
-        "confirm-process_speak_user_details",
-        "yes,confirm-process_speak_user_details",
-        "yes,please-process_speak_user_details",
-        "good,to,go-process_speak_user_details",
-        "go,ahead-process_speak_user_details",
-        "ahead-process_speak_user_details",
-        "yes,yes-process_speak_user_details",
-        "yess-process_speak_user_details",
-        "yes-process_speak_user_details",
-        "sure-process_speak_user_details",
-        "of,course-process_speak_user_details",
-        "proceed-process_speak_user_details",
-        "modified-process_modify_education",
-        "modify,last,name-process_modify_education",
-        "modify-process_modify_education",
-        "changed-process_modify_education",
-        "change-process_modify_education",
-        "edit-process_modify_education",
-        "add,it-process_modify_education",
-        "edit,details-process_modify_education"
+        "modify,date,of,birth-process_ask_date_of_birth",
+        "modify,city-process_ask_city",
+        "modify,gender-process_ask_gender",
+        "modify,name-process_ask_name",
+        "modify,first,name-process_modify_first_name",
+        "modify,marital,status-process_ask_marital",
+        "modify,state-process_ask_state",
+        "modify,country-process_ask_country",
+        "modify,pin,code-process_ask_pin_code",
+        "modify,phone-process_ask_phone_no",
+        "modify,email-process_ask_email",
+        "modify,education-process_ask_education",
+        "date,of,birth-process_ask_date_of_birth",
+        "city-process_ask_city",
+        "gender-process_ask_gender",
+        "name-process_ask_name",
+        "first,name-process_ask_first_name",
+        "marital,status-process_ask_marital",
+        "state-process_ask_state",
+        "country-process_ask_country",
+        "pin,code-process_ask_pin_code",
+        "phone-process_ask_phone_no",
+        "email-process_ask_email_address",
+        "education-process_ask_education"
       ],
-      "help_command": "Please say confirm or modify education?"
+      "action_intent": "process_ask_field_to_modify",
+      "help_command": "what would you like to modify",
+      "help_command_alternate": "what would you like to modify please speak clearly"
     },
-    "process_modify_education": {
-      "spoken_feedback": "do you want to add some more education fields or want to remove selected education fields",
-      "is_question": true,
-      "action_intent": "process_modify_education",
-      "answers":[
-        "add-process_add_education",
-        "aid-process_add_education",
-        "remove-process_remove_education",
-        "delete-process_remove_education"
-      ],
-      "error_next": "shut_down",
-      "help_command": "would you like to add or remove fields"
+    "process_submit_user_details": {
+      "spoken_feedback": "Congratulations! Your U P I form was filled successfully!",
+      "action_intent": "process_submit_user_details",
+      "action_id": 696
     },
-    "process_add_education": {
-      "spoken_feedback": "please speak education fields again which would you like to add",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_add_education",
-      "education_intent": "add",
-      "node_to_process": "education",
-      "node_value_type": "id",
-      "next": "process_confirm_education",
-      "error_next": "shut_down",
-      "help_command": "please repeat education fields which would you like to add"
-    },
-    "process_remove_education": {
-      "spoken_feedback": "please speak education fields again which would you like to remove",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_remove_education",
-      "education_intent": "remove",
-      "node_to_process": "education",
-      "node_value_type": "id",
-      "next": "process_confirm_education",
-      "error_next": "shut_down",
-      "help_command": "please repeat education fields which would you like to remove"
-    },
-
-
-    "process_ask_last_name": {
-      "spoken_feedback": "Please speak the last name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_ask_last_name",
-      "node_to_process": "last-name",
-      "node_value_type": "id",
-      "next":"process_confirm_last_name",
-      "error_next": "shut_down",
-      "help_command": "speak your last name",
-      "help_command_alternate": "Please speak your last name"
-    },
-    "process_confirm_last_name": {
-      "spoken_feedback": "Please say confirm or modify last name ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_phone",
-        "gun,form-process_ask_phone",
-        "gun,foam-process_ask_phone",
-        "gun,forum-process_ask_phone",
-        "gun,fom-process_ask_phone",
-        "gun,formed-process_ask_phone",
-        "confirm,last,name-process_ask_phone",
-        "proceed-process_ask_phone",
-        "confirm-process_ask_phone",
-        "yes,confirm-process_ask_phone",
-        "yes,please-process_ask_phone",
-        "good,to,go-process_ask_phone",
-        "go,ahead-process_ask_phone",
-        "ahead-process_ask_phone",
-        "yes,yes-process_ask_phone",
-        "yess-process_ask_phone",
-        "yes-process_ask_phone",
-        "sure-process_ask_phone",
-        "of,course-process_ask_phone",
-        "proceed-process_ask_phone",
-        "modified-process_modify_last_name",
-        "modify,last,name-process_modify_last_name",
-        "modify-process_modify_last_name",
-        "changed-process_modify_last_name",
-        "change-process_modify_last_name",
-        "edit-process_modify_last_name",
-        "add,it-process_modify_last_name",
-        "edit,details-process_modify_last_name"
-      ],
-      "help_command": "Please say confirm or modify last name ?"
-    },
-    "process_modify_last_name": {
-      "spoken_feedback": "speak modified last name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_last_name",
-      "node_to_process": "last-name",
-      "node_value_type": "id",
-      "next": "process_confirm_last_name",
-      "error_next": "shut_down",
-      "help_command": "please speak modified last name"
-    },
-
-    "process_ask_marital": {
-      "spoken_feedback": "Please speak the marital status",
-      "is_question": true,
-      "action_intent": "process_ask_marital",
-      "node_to_process": "marital",
-      "answers": [
-        "single-process_set_marital_single",
-        "singal-process_set_marital_single",
-        "s-process_set_marital_single",
-        "singhal-process_set_marital_single",
-        "divorced-process_set_marital_divorced",
-        "divorce-process_set_marital_divorced",
-        "divorsed-process_set_marital_divorced",
-        "dievorced-process_set_marital_divorced",
-        "married-process_set_marital_married",
-        "marry-process_set_marital_married",
-        "marie-process_set_marital_married",
-        "maried-process_set_marital_married",
-        "mattered-process_set_marital_married"
-      ],
-      "error_next": "shut_down",
-      "help_command": "speak your marital status",
-      "help_command_alternate": "Please speak your marital status"
-    },
-    "process_set_marital_single": {
-       "action_id": 1001,
-       "next": "process_confirm_marital",
-       "node_to_process" :"single",
-       "action_intent": "process_set_marital"
-    },
-    "process_set_marital_married": {
-       "action_id": 1001,
-       "next": "process_confirm_marital",
-       "node_to_process" :"married",
-       "action_intent": "process_set_marital"
-    },
-    "process_set_marital_divorced": {
-       "action_id": 1001,
-       "next": "process_confirm_marital",
-       "node_to_process" :"divorced",
-       "action_intent": "process_set_marital"
-    },
-    "process_confirm_marital": {
-      "spoken_feedback": "Please say confirm or modify marital-status ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_city",
-        "gun,form-process_ask_city",
-        "gun,foam-process_ask_city",
-        "gun,forum-process_ask_city",
-        "gun,fom-process_ask_city",
-        "gun,formed-process_ask_city",
-        "confirm,marital,status-process_ask_city",
-        "proceed-process_ask_city",
-        "confirm-process_ask_city",
-        "yes,confirm-process_ask_city",
-        "yes,please-process_ask_city",
-        "good,to,go-process_ask_city",
-        "go,ahead-process_ask_city",
-        "ahead-process_ask_city",
-        "yes,yes-process_ask_city",
-        "yess-process_ask_city",
-        "yes-process_ask_city",
-        "sure-process_ask_city",
-        "of,course-process_ask_city",
-        "proceed-process_ask_city",
-        "modified-process_modify_marital",
-        "modify,marital,status-process_modify_marital",
-        "modify-process_modify_marital",
-        "changed-process_modify_marital",
-        "change-process_modify_marital",
-        "edit-process_modify_marital",
-        "add,it-process_modify_marital",
-        "edit,details-process_modify_marital"
-      ],
-      "help_command": "Please say confirm or modify marital status ?"
-    },
-    "process_modify_marital": {
-      "spoken_feedback": "speak modified marital status",
-      "is_question": true,
-      "action_intent": "process_modify_marital",
-      "answers": [
-        "single-process_set_marital_single",
-        "singal-process_set_marital_single",
-        "s-process_set_marital_single",
-        "singhal-process_set_marital_single",
-        "divorced-process_set_marital_divorced",
-        "divorce-process_set_marital_divorced",
-        "divorsed-process_set_marital_divorced",
-        "dievorced-process_set_marital_divorced",
-        "married-process_set_marital_married",
-        "marry-process_set_marital_married",
-        "marie-process_set_marital_married",
-        "maried-process_set_marital_married",
-        "mattered-process_set_marital_married"
-      ],
-      "next": "process_confirm_marital",
-      "error_next": "shut_down",
-      "help_command": "please speak modified marital status"
-    },
-
-    "process_ask_state": {
-      "spoken_feedback": "Please speak your state name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_ask_state",
-      "node_to_process": "state",
-      "node_value_type": "id",
-      "next":"process_confirm_state",
-      "error_next": "shut_down",
-      "help_command": "speak your  valid state name from the list of state",
-      "help_command_alternate": "Please speak your state name"
-    },
-    "process_confirm_state": {
-      "spoken_feedback": "Please say confirm or modify state name ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_ask_country",
-        "gun,form-process_ask_country",
-        "gun,foam-process_ask_contry",
-        "gun,forum-process_ask_country",
-        "gun,fom-process_ask_country",
-        "gun,formed-process_ask_country",
-        "confirm,state,name-process_ask_country",
-        "proceed-process_ask_country",
-        "confirm-process_ask_country",
-        "yes,confirm-process_ask_country",
-        "yes,please-process_ask_country",
-        "good,to,go-process_ask_country",
-        "go,ahead-process_ask_country",
-        "ahead-process_ask_country",
-        "yes,yes-process_ask_country",
-        "yess-process_ask_country",
-        "yes-process_ask_country",
-        "sure-process_ask_country",
-        "of,course-process_ask_country",
-        "proceed-process_ask_country",
-        "modified-process_modify_state",
-        "modify,state,name-process_modify_state",
-        "modify-process_modify_state",
-        "changed-process_modify_state",
-        "change-process_modify_state",
-        "edit-process_modify_state",
-        "add,it-process_modify_state",
-        "edit,details-process_modify_state"
-      ],
-      "help_command": "Please say confirm or modify state name ?"
-    },
-    "process_modify_state": {
-      "spoken_feedback": "speak modified state name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_state",
-      "node_to_process": "state",
-      "node_value_type": "id",
-      "next": "process_confirm_state",
-      "error_next": "shut_down",
-      "help_command": "please speak modified state name"
-    },
-
-    "process_ask_country": {
-      "spoken_feedback": "Please speak your country name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_ask_country",
-      "node_to_process": "country",
-      "node_value_type": "id",
-      "next":"process_confirm_country",
-      "error_next": "shut_down",
-      "help_command": "speak your  valid country name from the list of countries",
-      "help_command_alternate": "Please speak your country name"
-    },
-    "process_confirm_country": {
-      "spoken_feedback": "Please say confirm or modify country name ?",
-      "is_question": true,
-      "answers": [
-        "submit-process_submit_user_details",
-        "summit-process_submit_user_details",
-        "confirmed-process_speak_user_details",
-        "gun,form-process_speak_user_details",
-        "gun,foam-process_speak_user_details",
-        "gun,forum-process_speak_user_details",
-        "gun,fom-process_speak_user_details",
-        "gun,formed-process_speak_user_details",
-        "confirm,country,name-process_speak_user_details",
-        "proceed-process_speak_user_details",
-        "confirm-process_speak_user_details",
-        "yes,confirm-process_speak_user_details",
-        "yes,please-process_speak_user_details",
-        "good,to,go-process_speak_user_details",
-        "go,ahead-process_speak_user_details",
-        "ahead-process_speak_user_details",
-        "yes,yes-process_speak_user_details",
-        "yess-process_speak_user_details",
-        "yes-process_speak_user_details",
-        "sure-process_speak_user_details",
-        "of,course-process_speak_user_details",
-        "proceed-process_speak_user_details",
-        "modified-process_modify_country",
-        "modify,country,name-process_modify_country",
-        "modify-process_modify_country",
-        "changed-process_modify_country",
-        "change-process_modify_country",
-        "edit-process_modify_country",
-        "add,it-process_modify_country",
-        "edit,details-process_modify_country"
-      ],
-      "help_command": "Please say confirm or modify country name ?"
-    },
-    "process_modify_country": {
-      "spoken_feedback": "speak modified country name",
-      "is_question": true,
-      "action_id": 3,
-      "action_intent": "process_modify_country",
-      "node_to_process": "country",
-      "node_value_type": "id",
-      "next": "process_confirm_country",
-      "error_next": "shut_down",
-      "help_command": "please speak modified country name"
-    },
-
-    "process_ask_for_submit_or_modify_user_details": {
-      "spoken_feedback": "What would you like to modify name phone number or anything else ? or submit yours details",
-      "is_question": true,
-        "answers": [
-          "submit-process_submit_user_details",
-          "summit-process_submit_user_details",
-          "modify,date,of,birth-process_modify_date_of_birth",
-          "modify,city-process_modify_city",
-          "modify,gender-process_modify_gender",
-          "modify,last,name-process_modify_last_name",
-          "modify,first,name-process_modify_first_name",
-          "modify,marital,status-process_modify_marital",
-          "modify,state-process_modify_state",
-          "modify,country-process_modify_country",
-          "modify,pin,code-process_modify_pin_code",
-          "modify,phone-process_modify_phone",
-          "modify,email-process_modify_email",
-          "modify,education-process_modify_education"
-        ],
-      "action_intent": "process_ask_for_submit_or_modify_user_details",
-      "help_command": "would you like to modify any detail or say submit to submit the details"
-    },
-    "process_speak_user_details": {
-      "action_id": 104,
-      "action_intent": "process_speak_user_details",
-      "is_custom_action": true,
-      "next": "process_ask_for_submit_or_modify_user_details",
-      "nodes_to_read": [
-        "first-name",
-        "date-of-birth",
-        "phone"
-      ]
-    },
-    "process_submit_user_details":{
-        "spoken_feedback": "your details submitted successfully!",
-        "action_intent": "process_submit_user_details",
-        "action_id": 23
-    },
-
-
-
-
-
     "process_check_for_no_screen_found": {
-        "action_id": 21,
-        "action_description": "check for no screen found",
-        "next": "process_no_screen_found"
+      "action_id": 21,
+      "action_description": "check for no screen found",
+      "next": "process_no_screen_found"
     },
     "process_no_screen_found": {
-        "action_id": 20,
-        "action_description": "no screen found"
+      "action_id": 20,
+      "action_description": "no screen found"
     },
     "process_delete_yes_or_no": {
       "spoken_feedback": "would u like to delete fund, yes or no",
@@ -1075,7 +413,7 @@
         "nothing-process_give_next_feedback"
       ]
     },
-    "go_to_switch_bank_transfer":{
+    "go_to_switch_bank_transfer": {
       "action_id": 1003,
       "action_intent": "go_to_switch_bank_transfer",
       "node_to_process": "next-button",
@@ -1122,7 +460,7 @@
       "is_custom_action": true,
       "node_to_process": "payee_list",
       "second_node_to_process": "payee-item",
-      "node_value_type":"id",
+      "node_value_type": "id",
       "process_for_next_screen": "process_speak_payee_item_details",
       "error_next": "shut_down"
     },
@@ -1223,9 +561,9 @@
         "cancel,this-process_cancel_transaction",
         "cancel,transaction-process_cancel_transaction",
         "cancel-process_cancel_transaction",
-        "not-process_cancel_transaction",   
+        "not-process_cancel_transaction",
         "no-process_cancel_transaction",
-        "not-process_cancel_transaction"   
+        "not-process_cancel_transaction"
       ],
       "help_command": "Simply say: Transfer money. Or, Check account balance.",
       "help_command_alternate": "You can say: Transfer money. Or, Check account balance."
@@ -1251,7 +589,7 @@
       "action_intent": "process_ask_payee_name",
       "node_to_process": "search-payees",
       "node_value_type": "id",
-      "next":"process_fetch_payee_list",
+      "next": "process_fetch_payee_list",
       "error_next": "shut_down",
       "help_command": "Please speak the name of the payee",
       "help_command_alternate": "Please speak the name of the payee"
@@ -1284,7 +622,7 @@
         "ok-process_ask_payee_name",
         "s-process_ask_payee_name",
         "no-process_cancel_transaction",
-        "not-process_cancel_transaction"        
+        "not-process_cancel_transaction"
       ],
       "help_command": "Would you like to do a bank transfer? Yes, or, No?",
       "help_command_alternate": "Would you like to do a bank transfer? Yes, or, No?"
@@ -1305,7 +643,7 @@
       "action_id": 4,
       "node_to_process": "amount",
       "node_value_type": "id",
-      "next":"process_read_transfer_details",
+      "next": "process_read_transfer_details",
       "help_command": "Please speak the amount",
       "help_command_alternate": "Please speak the amount you would like to send"
     },
@@ -1377,17 +715,17 @@
       "help_command": "Please say confirm or modify details ?"
     },
     "process_click_on_transfer_now_button": {
-        "action_id": 1003,
-        "action_intent": "process_click_on_transfer_now_button",
-        "node_to_process": "transfer-now-btn",
-        "node_value_type": "id",
-        "spoken_feedback": "Okay",
-        "error_next": "shut_down"
+      "action_id": 1003,
+      "action_intent": "process_click_on_transfer_now_button",
+      "node_to_process": "transfer-now-btn",
+      "node_value_type": "id",
+      "spoken_feedback": "Okay",
+      "error_next": "shut_down"
     },
     "process_check_for_modification_transfer": {
-       "spoken_feedback": "What would you like to modify? Payee name, Amount, or, Transfer Type?",
-       "is_question": true,
-       "answers": [
+      "spoken_feedback": "What would you like to modify? Payee name, Amount, or, Transfer Type?",
+      "is_question": true,
+      "answers": [
         "amount-process_ask_amount",
         "money-process_ask_amount",
         "am-process_ask_amount",
@@ -1417,7 +755,6 @@
       "delay_to_next": 2000,
       "next": "process_ask_payee_name",
       "error_next": "shut_down"
-
     },
     "process_select_otp_confirmation": {
       "spoken_feedback": "Enter the otp manually",
@@ -1454,15 +791,15 @@
       "action_id": 23,
       "spoken_feedback": "Encountered a problem, Going Silent"
     },
-    "okay_see_you_soon":{
-      "action_id":23,
-      "spoken_feedback":"Okay, See you soon. Bye."
+    "okay_see_you_soon": {
+      "action_id": 23,
+      "spoken_feedback": "Okay, See you soon. Bye."
     },
-    "okay_get_that_going_silent":{
-      "action_id":23,
-      "spoken_feedback":"Okay, I get that. Going Silent"
+    "okay_get_that_going_silent": {
+      "action_id": 23,
+      "spoken_feedback": "Okay, I get that. Going Silent"
     },
-    "okay_no_worries_see_you_soon":{
+    "okay_no_worries_see_you_soon": {
       "action_id": 23,
       "spoken_feedback": "Okay! No worries, see you soon"
     },
@@ -1472,15 +809,147 @@
     }
   },
   "match_words": {
-    "male": ["male","mail","aadmi","ail","mal","maile","mali","man","main","he"],
-    "Graduate": ["graduate","gaduate","grad,u,ate"],
-    "Postgraduate": ["pg","post","post,graduate","postgraduate","post graduate"],
-    "High School":["high school","high","school","highschool","stool"],
-    "Diploma":["diploma","deploma","ploma","theploma"],
-    "Doctorate":["doctorate","doctor,ate"],
-    "Professional Certification":["professional certification","certi","certified","professional","certificate"],
-    "female": ["female","femail","aurat","feail","femal","femaile","femali","she","ladies"],
-    "other": ["other","order","trans","bi","bye","lesbian","author"],
+    "id_info": {
+      "name": [
+        "name",
+        "nam",
+        "full name"
+      ],
+      "date_of_birth": [
+        "date of birth",
+        "date,of,birth",
+        "birth",
+        "date",
+        "date of bird",
+        "that of bird",
+        "that of birth",
+        "dob",
+        "d-o-b"
+      ],
+      "pin_code": [
+        "pincode",
+        "pin,code",
+        "pin code",
+        "pin",
+        "code",
+        "pin cod",
+        "6 digit",
+        "6 digit pin code",
+        "pin code of my area is"
+      ],
+      "phone": [
+        "phone",
+        "phone no",
+        "phone number",
+        "contact",
+        "contact details",
+        "contact number",
+        "number"
+      ],
+      "email": [
+        "email address",
+        "email",
+        "mail",
+        "g-mail"
+      ],
+      "gender": [
+        "gender"
+      ],
+      "education": [
+        "education",
+        "age you cation",
+        "aducation"
+      ]
+    },
+    "male": [
+      "male",
+      "mail",
+      "aadmi",
+      "ail",
+      "mal",
+      "maile",
+      "mali",
+      "man",
+      "main",
+      "he"
+    ],
+    "female": [
+      "female",
+      "femail",
+      "aurat",
+      "feail",
+      "femal",
+      "femaile",
+      "femali",
+      "she",
+      "ladies"
+    ],
+    "other": [
+      "other",
+      "order",
+      "trans",
+      "bi",
+      "bye",
+      "lesbian",
+      "author"
+    ],
+    "education": {
+      "Graduate": [
+        "graduate",
+        "gaduate",
+        "grad,u,ate",
+        "one",
+        "first",
+        "first one"
+      ],
+      "Postgraduate": [
+        "pg",
+        "post",
+        "post,graduate",
+        "postgraduate",
+        "post graduate",
+        "two",
+        "second",
+        "second one"
+      ],
+      "High School": [
+        "high school",
+        "high",
+        "school",
+        "highschool",
+        "stool",
+        "third",
+        "three",
+        "third one"
+      ],
+      "Diploma": [
+        "diploma",
+        "deploma",
+        "ploma",
+        "theploma",
+        "fourth",
+        "fourth one",
+        "four"
+      ],
+      "Doctorate": [
+        "doctorate",
+        "doctor,ate",
+        "fifth",
+        "five",
+        "5",
+        "fifth one"
+      ],
+      "Professional Certification": [
+        "professional certification",
+        "certi",
+        "certified",
+        "professional",
+        "certificate",
+        "sixth",
+        "6",
+        "six"
+      ]
+    },
     "cancel": [
       "cancelled",
       "cancelling",
@@ -1529,7 +998,7 @@
       "get,this",
       "selection"
     ],
-    "select_fund":[
+    "select_fund": [
       "select",
       "choose",
       "chose",
@@ -1666,7 +1135,7 @@
       "slower",
       "slowest"
     ],
-    "years" : [
+    "years": [
       "year",
       "years",
       "ear",
@@ -1728,14 +1197,14 @@
       "see",
       "see,funds"
     ],
-    "fund_name_start_words":[
+    "fund_name_start_words": [
       "in",
       "through",
       "to",
       "for",
       "search"
     ],
-    "remove_fund_words":[
+    "remove_fund_words": [
       "in",
       "buy",
       "by"
@@ -1747,7 +1216,7 @@
       "via",
       "by"
     ],
-    "search":[
+    "search": [
       "search",
       "invest"
     ],
@@ -1814,11 +1283,11 @@
       "minus",
       "-"
     ],
-    "negative_matchword":[
-     "do,not",
-     "don't",
-     "not",
-     "nothing"
+    "negative_matchword": [
+      "do,not",
+      "don't",
+      "not",
+      "nothing"
     ],
     "invest": [
       "invest",
@@ -1848,8 +1317,5 @@
       "yearly"
     ]
   },
-
-  "ids": {
-   
-  }
+  "ids": {}
 }

@@ -101,17 +101,41 @@ export const getViewById = (context, nodeID) => {
 // get text of multiple components based on document and their ids
 export const getTextContentByIds = (document, ids) => {
   console.log("getTextContentByIds");
+  
   return ids.map(id => {
     const element = document.getElementById(id);
     console.log("element", element);
+    
+    // Handle buttons with 'active' class
     if (element && element.tagName.toLowerCase() === 'button') {
       if (element.classList.contains('active')) {
         return element.textContent; 
       }
     }
+
+    // Handle input fields
     if (element && element.tagName.toLowerCase() === 'input') {
       return element.value;
     }
+
+    // Handle radio buttons (for example, gender)
+    if (id === 'gender') {
+      const checkedGender = document.querySelector('input[name="gender"]:checked');
+      return checkedGender ? checkedGender.value : null; // Return the checked value or null
+    }
+
+    // Handle select dropdowns (like city)
+    if (element && element.tagName.toLowerCase() === 'select') {
+      return element.value; // Return the selected value from the dropdown
+    }
+
+    // Handle checkboxes for education (return 'present' if any are checked)
+    if (id === 'education') {
+      const checkedBoxes = document.querySelectorAll('input[id^="education-"]:checked');
+      return checkedBoxes.length > 0 ? 'present' : null; // Return 'present' if at least one is checked
+    }
+
+    // Default to returning textContent for other elements
     return element ? element.textContent : null;
   });
 }

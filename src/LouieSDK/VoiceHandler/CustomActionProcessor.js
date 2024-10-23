@@ -275,7 +275,29 @@ export const handleProcess =  (process, commandId, context) => {
             } else {
               FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
             }
-          } 
+          } else if (process.action_id === CustomVoiceFlags.PROCESS_CHECK_FOR_EMPTY_FIELD) {
+            console.log("6","1");
+            if (context !== undefined && context !== null) {
+              console.log("check for empty field");
+              // FeedbackProcessor.speakToUser(speakableText, VOICE_NONE, true);
+              var nodeToRead = ['name', 'phone', 'pin_code', 'email' , 'date_of_birth', 'gender','city','education'];
+              var dataArray = ViewParser.getTextContentByIds(context, nodeToRead);
+              var nextField = "submit_or_modify"; // Default value
+
+              for (let i = 0; i < dataArray.length; i++) {
+                if (!dataArray[i] || dataArray[i].trim() === "") { 
+                  // If the field is empty, set `nextField` to the corresponding field name
+                  nextField = nodeToRead[i];
+                  break; // Exit the loop after finding the first empty field
+                }
+              }
+              console.log("empty field is:",nextField);
+              VoiceEventProcessor.handleCommandByCommandId(process.next[nextField]);
+            } else {
+              console.log("shayad yha aa rha ");
+              FeedbackProcessor.speakToUser(ConstantString.encounter_problem_going_silent, VOICE_END, false);
+            }
+          }
         } 
       } catch (err) {
         console.log("catch block", err);

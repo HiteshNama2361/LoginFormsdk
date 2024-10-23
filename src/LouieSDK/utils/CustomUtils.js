@@ -387,6 +387,8 @@ export const gmailEmailIdCorrection = (phraseOrg) => {
       "add the date",
       "at the ret",
       "add the ret",
+      "at red",
+      "at"
     ];
     const arrayListOfDot = ["dot", "dort", "period"];
     const arrayListOfHyphen = ["hyphen", "hi-fan", "hifun", "haifan", "hifan", "dash"];
@@ -431,7 +433,7 @@ export const gmailEmailIdCorrection = (phraseOrg) => {
     // You can add more domains like "@outlook", "@hotmail", etc. similarly if needed.
     
     return phrase; // Return cleaned up phrase without spaces
-  };
+};
   
 
 // Helper function to check if the email is valid
