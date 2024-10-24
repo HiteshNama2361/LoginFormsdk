@@ -9,6 +9,18 @@ import { eventEmitter } from '../LouieSDK/Interfaces/Callbacks';
 
 const Form = () => {
 
+  useEffect(() => {
+    console.log("inside useEffect of form screen");
+    setCurrentScreenDetails(document, "FlatList", null);
+    // console.log("setCurrentScreenDetails", setCurrentScreenDetails);
+    //addScreenOffReceiver(document);
+    // Cleanup event listener on component unmount
+    return () => {
+      console.log("Cleaning up event listeners");
+      //removeScreenOffReceiver();
+    };
+  }, []);
+
   const [name, setName] = useState('');
   const [date_of_birth, setDateofbirth] = useState('');
   const [gender, setGender] = useState('');
