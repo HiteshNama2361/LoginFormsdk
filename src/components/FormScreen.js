@@ -167,6 +167,7 @@ const Form = () => {
       createAndUpdateRootWindow(action);
     } else if (field === 'education') {
       console.log("inside setting education", result);
+      setEducation([]);
       setEducation((prevEducation) => {
         // Create a new set by merging previous education and new matchedKeys
         const updatedEducation = [...new Set([...prevEducation, ...result])];

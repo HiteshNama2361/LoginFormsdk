@@ -280,6 +280,7 @@ export const handleProcess =  (process, commandId, context) => {
             if (context !== undefined && context !== null) {
               console.log("check for empty field");
               // FeedbackProcessor.speakToUser(speakableText, VOICE_NONE, true);
+              // var nodeToRead=['date_of_birth'];
               var nodeToRead = ['name', 'phone', 'pin_code', 'email' , 'date_of_birth', 'gender','city','education'];
               var dataArray = ViewParser.getTextContentByIds(context, nodeToRead);
               var nextField = "submit_or_modify"; // Default value

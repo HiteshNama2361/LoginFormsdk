@@ -194,7 +194,7 @@
       "action_intent": "process_ask_name",
       "node_value_type": "id",
       "error_next": "shut_down",
-      "help_command": "what is your full name?",
+      "help_command": "speak your full name, or try spelling the name",
       "help_command_alternate": "Please speak your full name"
     },
     "process_ask_phone_no": {
@@ -242,7 +242,7 @@
       "help_command_alternate": " What is the PIN code of your area?"
     },
     "process_ask_email_address": {
-      "spoken_feedback": "Please your your Email ID.",
+      "spoken_feedback": "Please speak your Email ID.",
       "is_question": true,
       "node_to_process": "email",
       "next": "process_find_next_empty_field",
@@ -308,7 +308,7 @@
       "help_command_alternate": "speak your gender."
     },
     "process_ask_city": {
-      "spoken_feedback": "please Select your city name from the list manually.",
+      "spoken_feedback": "select your city from the list.",
       "node_to_process": "city",
       "next": "process_find_next_empty_field",
       "action_id": 69,
@@ -345,8 +345,40 @@
       "is_question": true,
       "answers": [
         "modify-process_ask_field_to_modify",
+        "edit-process_ask_field_to_modify",
+        "change-process_ask_field_to_modify",
         "confirm-process_submit_user_details",
-        "submit-process_submit_user_details"
+        "submit-process_submit_user_details",
+        "modify,date,of,birth-process_ask_date_of_birth",
+        "modify,city-process_ask_city",
+        "modify,gender-process_ask_gender",
+        "modify,gender,option-process_ask_gender",
+        "modify,name-process_ask_name",
+        "modify,pin,code-process_ask_pin_code",
+        "modify,phone-process_ask_phone_no",
+        "modify,phone,number-process_ask_phone_no",
+        "modify,email-process_ask_email",
+        "modify,education-process_ask_education",
+        "change,date,of,birth-process_ask_date_of_birth",
+        "change,city-process_ask_city",
+        "change,gender-process_ask_gender",
+        "change,gender,option-process_ask_gender",
+        "change,name-process_ask_name",
+        "change,pin,code-process_ask_pin_code",
+        "change,phone-process_ask_phone_no",
+        "change,phone,number-process_ask_phone_no",
+        "change,email-process_ask_email",
+        "change,education-process_ask_education",
+        "edit,date,of,birth-process_ask_date_of_birth",
+        "edit,city-process_ask_city",
+        "edit,gender-process_ask_gender",
+        "edit,gender,option-process_ask_gender",
+        "edit,name-process_ask_name",
+        "edit,pin,code-process_ask_pin_code",
+        "edit,phone-process_ask_phone_no",
+        "edit,phone,number-process_ask_phone_no",
+        "edit,email-process_ask_email",
+        "edit,education-process_ask_education"
       ],
       "action_intent": "process_ask_modify_or_submit",
       "help_command": "Simply say, confirm or modify",
@@ -361,13 +393,11 @@
         "modify,date,of,birth-process_ask_date_of_birth",
         "modify,city-process_ask_city",
         "modify,gender-process_ask_gender",
+        "modify,gender,option-process_ask_gender",
         "modify,name-process_ask_name",
-        "modify,first,name-process_modify_first_name",
-        "modify,marital,status-process_ask_marital",
-        "modify,state-process_ask_state",
-        "modify,country-process_ask_country",
         "modify,pin,code-process_ask_pin_code",
         "modify,phone-process_ask_phone_no",
+        "modify,phone,number-process_ask_phone_no",
         "modify,email-process_ask_email",
         "modify,education-process_ask_education",
         "date,of,birth-process_ask_date_of_birth",
@@ -381,7 +411,27 @@
         "pin,code-process_ask_pin_code",
         "phone-process_ask_phone_no",
         "email-process_ask_email_address",
-        "education-process_ask_education"
+        "education-process_ask_education",
+        "change,date,of,birth-process_ask_date_of_birth",
+        "change,city-process_ask_city",
+        "change,gender-process_ask_gender",
+        "change,gender,option-process_ask_gender",
+        "change,name-process_ask_name",
+        "change,pin,code-process_ask_pin_code",
+        "change,phone-process_ask_phone_no",
+        "change,phone,number-process_ask_phone_no",
+        "change,email-process_ask_email",
+        "change,education-process_ask_education",
+        "edit,date,of,birth-process_ask_date_of_birth",
+        "edit,city-process_ask_city",
+        "edit,gender-process_ask_gender",
+        "edit,gender,option-process_ask_gender",
+        "edit,name-process_ask_name",
+        "edit,pin,code-process_ask_pin_code",
+        "edit,phone-process_ask_phone_no",
+        "edit,phone,number-process_ask_phone_no",
+        "edit,email-process_ask_email",
+        "edit,education-process_ask_education"
       ],
       "action_intent": "process_ask_field_to_modify",
       "help_command": "what would you like to modify",
@@ -392,6 +442,8 @@
       "action_intent": "process_submit_user_details",
       "action_id": 696
     },
+
+
     "process_check_for_no_screen_found": {
       "action_id": 21,
       "action_description": "check for no screen found",
@@ -898,7 +950,6 @@
         "graduate",
         "gaduate",
         "grad,u,ate",
-        "one",
         "first",
         "first one"
       ],
@@ -909,7 +960,6 @@
         "postgraduate",
         "post graduate",
         "two",
-        "second",
         "second one"
       ],
       "High School": [

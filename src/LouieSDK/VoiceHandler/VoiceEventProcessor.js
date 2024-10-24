@@ -846,6 +846,9 @@ export const setFieldVoiceResults = async (field,value,flag) => {
       result=result.toLowerCase();
       var flag1=false;
       if(field === 'name'){
+        result = result.toLowerCase();
+        result = result?.replace(/,/g,' ');
+        result = result?.replace(/-/g,' ');
         result = result.charAt(0).toUpperCase() + result.slice(1);
         FeedbackProcessor.speakToUser("okay "+result, VOICE_NONE, false);
       }else if(field === 'phone'){
@@ -872,6 +875,7 @@ export const setFieldVoiceResults = async (field,value,flag) => {
         result = result.replace(new RegExp(pattern, "gi"), replacement);
         }
         result = result?.replace(/ /g, '');
+        result = result?.replace(/-/g,'');
         console.log("after replacement of one with 1 etc",result); // Outputs: "1 2 22 555"
         if(phoneRegex.test(result) === false){
             flag1=true;
@@ -923,6 +927,7 @@ export const setFieldVoiceResults = async (field,value,flag) => {
         }
       }else if(field === 'date_of_birth'){
         console.log("handling date of birth format");
+        console.log("date of birth in dob filter raw dob",result);
         // console.log("view ", view);
         var dateString = result;
         result='-';
@@ -933,6 +938,61 @@ export const setFieldVoiceResults = async (field,value,flag) => {
             /^\w+ of \w+ \d{4}$/,                      // e.g., "first of June 2023" or "second of May 2002"
             /^\d{1,2} \d{1,2} \d{4}$/                  // e.g., "2 12 2002"
         ];
+        const monthsMap = {
+            "Jan": "January",
+            "jan": "January",
+            "gen": "January",
+            "john": "January",
+            "January": "January",
+            "january": "January",
+            "Feb": "February",
+            "feb": "February",
+            "February": "February",
+            "february": "February",
+            "Mar": "March",
+            "mar": "March",
+            "March": "March",
+            "march": "March",
+            "Apr": "April",
+            "apr": "April",
+            "April": "April",
+            "april": "April",
+            "May": "May",
+            "may": "May",
+            "Mein": "May",
+            "mein": "May",
+            "main": "May",
+            "Main": "May",
+            "Jun": "June",
+            "jun": "June",
+            "June": "June",
+            "june": "June",
+            "Jul": "July",
+            "jul": "July",
+            "July": "July",
+            "july": "July",
+            "Aug": "August",
+            "aug": "August",
+            "August": "August",
+            "august": "August",
+            "Sep": "September",
+            "sep": "September",
+            "September": "September",
+            "september": "September",
+            "Oct": "October",
+            "oct": "October",
+            "October": "October",
+            "october": "October",
+            "Nov": "November",
+            "nov": "November",
+            "November": "November",
+            "november": "November",
+            "Dec": "December",
+            "dec": "December",
+            "December": "December",
+            "december": "December"
+        };
+        
         const ordinalToNumber = {
             first: '1', second: '2', third: '3', fourth: '4', fifth: '5',
             sixth: '6', seventh: '7', eighth: '8', ninth: '9', tenth: '10',
@@ -943,25 +1003,37 @@ export const setFieldVoiceResults = async (field,value,flag) => {
             'twenty-sixth': '26', 'twenty-seventh': '27', 'twenty-eighth': '28',
             'twenty-ninth': '29', thirtieth: '30', 'thirty-first': '31'
         };
+        function replaceWithMap(dateString, map) {
+            const regex = new RegExp(`\\b(${Object.keys(map).join('|')})\\b`, 'gi');
+            return dateString.replace(regex, (match) => map[match]);
+        }
+        dateString = replaceWithMap(dateString, dayMap);
+        dateString = replaceWithMap(dateString, monthsMap);
+        console.log("date after daymap",dateString);
+        // // Replace month names with numbers
+        // cleanedDateString = replaceWithMap(cleanedDateString, monthMap);
+        // dateString = cleanedDateString;
         // Parse date in various formats
         for (const format of dateFormats) {
             if (format.test(dateString)) {
                 let date;
-                
                 // Handle dd-mm-yyyy or dd/mm/yyyy formats
                 if (dateString.includes('-') || dateString.includes('/')) {
                     const [day, month, year] = dateString.split(/[-/]/);
                     date = new Date(`${year}-${month}-${day.replace(/(st|nd|rd|th)$/i, '')}`);
                 } else {
                     // Replace ordinal words with numbers (e.g., "first" -> "1")
-                    let cleanedDateString = dateString.toLowerCase()
+                    let cleanedDateString = dateString
                         .replace(/\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|eleventh|twelfth|thirteenth|fourteenth|fifteenth|sixteenth|seventeenth|eighteenth|nineteenth|twentieth|twenty-first|twenty-second|twenty-third|twenty-fourth|twenty-fifth|twenty-sixth|twenty-seventh|twenty-eighth|twenty-ninth|thirtieth|thirty-first)\b/gi, 
                             match => ordinalToNumber[match])
                         .replace(/(\d{1,2})(st|nd|rd|th)/gi, '$1') // Remove suffixes
                         .replace(/of /g, '')                      // Remove "of"
                         .replace(/\s+/g, ' ')                     // Normalize spaces
                         .trim();
-        
+                    cleanedDateString = cleanedDateString.replace(/\b\w+/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+
+                        // Add comma between day and year for correct parsing
+                    cleanedDateString = cleanedDateString.replace(/(\d{1,2}) (\d{4})/, '$1, $2');
                     date = new Date(cleanedDateString);
                 }
                 
@@ -1004,9 +1076,18 @@ export const setFieldVoiceResults = async (field,value,flag) => {
         }
         // If neither "male" nor "female" found, check for "other"
         if (gender === "unknown") {
-            gender = 'other';
+            for (let other of matchWordsJson.match_words.other) {
+                if (result.includes(other)) {
+                    gender = "other";
+                    break;
+                }
+            }
         }
-        result = gender;
+        if(gender === "unknown"){
+            flag1=true;
+        }else{
+            result = gender;
+        }
       }else if(field === 'city'){
         result = result?.replace(/ /g, '');
         if(!dropdowns.city.includes(result)){
